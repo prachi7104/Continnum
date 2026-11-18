@@ -1,0 +1,48 @@
+{
+  "name": "continuum",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^22.13.0 || ^24.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "node --no-warnings --env-file-if-exists=.env --import tsx --import ./scripts/sqlite-warnings.ts --watch server/src/index.ts",
+    "dev:client": "vite",
+    "start:server": "node --no-warnings --env-file-if-exists=.env --import tsx --import ./scripts/sqlite-warnings.ts server/src/index.ts",
+    "doctor": "node --experimental-strip-types --no-warnings --env-file-if-exists=.env --import ./scripts/sqlite-warnings.ts scripts/doctor.ts",
+    "check-sqlite": "node --experimental-strip-types --no-warnings --import ./scripts/sqlite-warnings.ts scripts/check-sqlite.ts",
+    "check-corpus": "node --experimental-strip-types scripts/check-corpus.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node --no-warnings --import tsx --import ./scripts/sqlite-warnings.ts node_modules/vitest/vitest.mjs run --maxWorkers=1",
+    "test:e2e": "playwright test",
+    "ci": "npm run typecheck && npm run lint && npm run check-sqlite && npm run check-corpus && npm test && npm run test:e2e"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "4.0.121",
+    "@hono/node-server": "2.1.9",
+    "ai": "7.0.173",
+    "hono": "4.13.19",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7",
+    "chrono-node": "2.10.3",
+    "react-markdown": "10.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@types/node": "24.10.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@vitejs/plugin-react": "6.3.0",
+    "concurrently": "10.0.7",
+    "eslint": "10.15.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.73.0",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  }
+}

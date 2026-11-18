@@ -1,0 +1,15 @@
+{
+  "gemini": {
+    "cap": 24,
+    "used": 0
+  },
+  "tavily": {
+    "cap": 5,
+    "used": 0
+  },
+  "groq": {
+    "cap": 0,
+    "used": 0
+  },
+  "entries": []
+}
