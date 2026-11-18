@@ -5,12 +5,12 @@
 | Phase | Status | Outcome |
 |---|---|---|
 | Phase 0 | **QUALIFICATION PASS** | Frozen fixtures, locked dependencies, SQLite checks, persistent ledger, and both live doctor modes verified. Per-model limits in the owner’s AI Studio dashboard were not observed. |
-| Phase 1 | **PARTIAL** | The local chat slice streams real Gemini answers and persists turns. The live browser check and 24 unit and integration tests passed. The stock CI exit and a fresh combined dev startup still need verification. |
+| Phase 1 | **PASS** | The local chat slice streams real Gemini answers and persists turns. A clean installation, combined dev startup and stock CI with 24 Vitest tests and one Chromium test passed. |
 
 ## Repository and environment
 
 - Workspace is `E:\projects\Continuum`.
-- Branch is `main`. The fixture freeze is `00a4d3d32d7b5e674e046a382a146ba7ab7cb23f`. The offline baseline is `7f2313f482dec3cb222f3246549bdf26b0cd8922`. Qualification evidence and live wiring follow as separate checkpoints.
+- Branch is `main`. The fixture freeze is `00a4d3d32d7b5e674e046a382a146ba7ab7cb23f`. The offline baseline is `7f2313f482dec3cb222f3246549bdf26b0cd8922`. Provider qualification and live streaming are committed separately as `e3c8133` and `6068f5f`.
 - `origin` is [prachi7104/Continnum](https://github.com/prachi7104/Continnum). GitHub metadata confirmed an empty private repository. No remote write or GitHub Actions run took place.
 - The owner-specified workspace and remote supersede the handoff's original location and local-only remote default. The ZIP supplied all seven authoritative v1.1 documents.
 - Windows NT 10.0.26300 x64, Node 24.11.0, npm 11.6.1, Git 2.46.2, SQLite 3.50.4. Initial free RAM was 0.73 GiB of 7.73 GiB. Free disk was 43.75 GiB on C: and 69.15 GiB on E:. The Git identity was configured.
@@ -44,7 +44,9 @@ Both doctor modes previously passed with credentials masked. After free-plan con
 - A clean archive of the committed offline baseline passed `npm ci` and all 23 tests. Vitest needed a path without the managed temporary directory's `#` character.
 - After wiring the qualified Gemini adapter, TypeScript and all 24 Vitest tests passed. The new adapter test verified one SDK fetch, two streamed text chunks and no registered tools.
 - The first Playwright run reached the app and stopped at browser launch because the pinned Chromium revision was missing.
-- With Chromium installed, Playwright exposed overlapping streamed and persisted messages during a sidebar refresh. The UI now switches to the persisted transcript in the same React update that clears the transient turn. The Chromium smoke passed in 3.7 seconds against real Vite and Hono servers over loopback using an external-server test configuration. It verified the streamed response, focus and persistence after reload at 360 px. The optional on-disk path assertion was skipped in that run. The stock CI invocation stalled during Playwright teardown in the managed session and was interrupted. Its exit status still needs a native run.
+- With Chromium installed, Playwright exposed overlapping streamed and persisted messages during a sidebar refresh. The UI now switches to the persisted transcript in the same React update that clears the transient turn. The first successful Chromium smoke used an external-server test configuration. The old stock configuration later stalled while terminating the nested `npm run dev` process.
+- On Node 24, a clean archive of `6068f5f` installed all 309 locked packages using `npm ci`. The updated Playwright setup launched and stopped Vite and Hono as direct child processes. Stock `npm run ci` exited 0 with 24 Vitest tests and one Chromium test. The browser test used real loopback and checked persistence after reload and the isolated fake database.
+- A separate `npm run dev` from the same clean directory started both processes. Chromium opened the UI, and the API reported `missing_key` through the Vite proxy. The snapshot contained no `.env`, and the provider keys were masked in the test processes.
 
 ### Live Gemini browser verification
 
@@ -63,7 +65,7 @@ A second run masked both provider keys. Hono reported `missing_key`, Chromium sh
 
 | # | Status | Evidence or blocker |
 |---|---|---|
-| 1 | **PARTIAL** | A clean offline baseline archive passed `npm ci`. Vite and Hono were started separately for browser verification. Combined `npm run dev` startup from a fresh checkout remains unverified. |
+| 1 | **PASS** | A clean source archive passed `npm ci`. Combined `npm run dev` launched both servers, and Chromium opened the UI through Vite. |
 | 2 | **PASS** | Real-loopback browser verification with both keys masked confirmed `missing_key`, the keyless notice, `NOT_CONFIGURED`, and zero provider attempts. |
 | 3 | **PASS** | Real Gemini answers streamed through the browser and persisted the selected model, one generation, route and three monotonic timings. The current-information prompt displayed the research prefix. |
 | 4 | **PASS** | In-process Stop cancellation and a real HTTP disconnect both aborted the scripted provider, saved partial text, released the lock, and allowed the next turn. |
@@ -71,14 +73,14 @@ A second run masked both provider keys. Hono reported `missing_key`, Chromium sh
 | 6 | **PASS (in-process)** | Same client turn ID returned `DUPLICATE_TURN` during and after the turn, with one message pair and one attempt. |
 | 7 | **PASS (offline)** | Composite FK mismatch rejected. Conversation deletion removed all dependent rows, and FTS integrity checks passed. |
 | 8 | **PASS** | Quick and full live doctor runs completed. The full gate passed, with 20/24 Gemini attempts and 2/5 Tavily credits. |
-| 9 | **PARTIAL** | Pinned static checks, 24 tests and the real-loopback browser smoke passed. Stock CI exit remains pending. |
+| 9 | **PASS** | Stock `npm run ci` exited 0 on Node 24. TypeScript, ESLint, SQLite, corpus verification, 24 Vitest tests and one real-loopback Playwright test passed. |
 | 10 | **PASS** | Fixture files and checker passed. The freeze commit and all five committed-blob SHA-256 hashes are recorded in [DECISIONS.md](DECISIONS.md). Resolver and retrieval implementation has not started. |
 | 11 | **PASS** | Native npm generated the v3 lockfile. All 21 exact pins match the manifest, the lockfile and the installed versions. |
 | 12 | **PASS (documents)** | `ENVIRONMENT.md`, `DECISIONS.md`, `PROVIDER-QUALIFICATION.md` and `qualification-ledger.json` are present and record the observed state. |
 
 ## Remaining work
 
-Record provider qualification and live integration as separate native Git commits. Verify stock CI and combined dev startup from a fresh checkout. Per-model limits in the owner's AI Studio dashboard were not observed. Phase 2 has not started.
+Commit the browser test teardown fix and final verification evidence. Node 22 and hosted CI were not run. Per-model limits in the owner's AI Studio dashboard were not observed. Phase 2 has not started.
 
 ## Environment recovery attempt
 
@@ -95,7 +97,7 @@ The earlier environment and verification observations are retained below.
 | Fixture freeze | **PASS**. The root commit and all five committed SHA-256 hashes are recorded in [DECISIONS.md](DECISIONS.md). The resolver and retrieval implementation are absent. |
 | Exact installation | **PASS**. Native npm installed the dependencies and generated `package-lock.json`. All 21 exact direct pins match the installed versions. |
 | Qualification | **PASS**. Quick and full live probes completed after free-plan confirmation. |
-| Pinned checks and fresh installation | The committed offline baseline passed a fresh `npm ci` and all 23 Vitest tests. Stock browser CI exit remains pending. |
+| Pinned checks and fresh installation | The clean live baseline passed `npm ci` and combined dev startup. With the direct-child browser setup, stock CI exited 0. |
 
 The Git ignore rules cover credential environment files, SQLite databases and sidecars, logs, browser sessions and authentication states, temporary test data, provider transcripts and installed packages. Eleven `git check-ignore` probes passed, and `.env.example` remains eligible for staging.
 
