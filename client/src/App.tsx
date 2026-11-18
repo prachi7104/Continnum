@@ -2,11 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
 import Markdown from 'react-markdown';
-import type { ChatMessage } from '../../shared/events.ts';
+import type { ChatMessage, EvidenceSource } from '../../shared/events.ts';
 import { getConversation, getConversations, getHealth, newConversation, streamTurn } from './api.ts';
 
 type Conversation = Awaited<ReturnType<typeof getConversations>>[number];
 type Health = Awaited<ReturnType<typeof getHealth>>;
+type Transient = { question: string; answer: string; sources: EvidenceSource[]; searches: Record<string, { query: string; result?: string }> };
 const dateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' });
 const dayFormat = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' });
 const errorMessage = (error: unknown) => error instanceof Error ? error.message : 'Continuum could not complete the request.';
@@ -35,6 +36,21 @@ function AssistantText({ content }: { content: string }) {
   </Markdown></div>;
 }
 
+function Sources({ sources }: { sources: EvidenceSource[] }) {
+  if (!sources.length) return null;
+  return <section className="sources" aria-label="Sources">
+    <h3>Sources</h3>
+    {sources.map((source) => <details key={source.ref}>
+      <summary>{source.ref} · {source.title} <small>{source.domain}</small></summary>
+      <p>Retrieved <time dateTime={source.retrievedAt}>{dateFormat.format(new Date(source.retrievedAt))}</time>
+        {source.domainMatch === 'exact' && ' · Site name matches'}</p>
+      {source.publishedAt && <p>Published <time dateTime={source.publishedAt}>{dateFormat.format(new Date(source.publishedAt))}</time></p>}
+      {source.sentences.map((sentence, index) => <p key={index}><strong>{source.ref}.{index + 1}</strong> {sentence}</p>)}
+      <a href={source.url} target="_blank" rel="noopener noreferrer">Open source</a>
+    </details>)}
+  </section>;
+}
+
 export function App() {
   const [health, setHealth] = useState<Health | null>(null);
   const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -43,7 +59,7 @@ export function App() {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [transient, setTransient] = useState<{ question: string; answer: string } | null>(null);
+  const [transient, setTransient] = useState<Transient | null>(null);
   const [status, setStatus] = useState('');
   const controller = useRef<AbortController | null>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
@@ -107,7 +123,7 @@ export function App() {
     setError('');
     setText('');
     setStatus('Waiting for a response');
-    setTransient({ question, answer: '' });
+    setTransient({ question, answer: '', sources: [], searches: {} });
     let id = selected;
     try {
       if (!id) {
@@ -116,9 +132,29 @@ export function App() {
         updateUrl(id);
       }
       await streamTurn(id, question, abort.signal, (event) => {
+        const append = (text: string) => setTransient((turn) => turn ? {
+          ...turn, answer: turn.answer + (turn.answer ? '\n\n' : '') + text,
+        } : turn);
         if (event.type === 'answer.delta') {
           setStatus('Receiving response');
           setTransient((turn) => turn ? { ...turn, answer: turn.answer + event.text } : turn);
+        } else if (event.type === 'search.started') {
+          setStatus('Searching the web');
+          setTransient((turn) => turn ? { ...turn, searches: { ...turn.searches, [event.queryId]: { query: event.query } } } : turn);
+        } else if (event.type === 'search.finished') {
+          setTransient((turn) => {
+            const search = turn?.searches[event.queryId];
+            return turn && search ? { ...turn, searches: { ...turn.searches, [event.queryId]: {
+              ...search, result: event.error ? 'Search unavailable' : event.resultCount + ' results',
+            } } } : turn;
+          });
+        } else if (event.type === 'sources') {
+          setTransient((turn) => turn ? { ...turn, sources: event.sources } : turn);
+        } else if (event.type === 'answer.sentence') {
+          setStatus('Receiving response');
+          append(event.text + (event.refs.length ? ' [' + event.refs.join(', ') + ']' : ' (no source)'));
+        } else if (event.type === 'answer.withheld') {
+          append("I left out " + event.count + " statements I couldn't support with the sources I found.");
         } else if (event.type === 'turn.error') {
           setError(event.code + ' · ' + event.message);
           setStatus('Turn ended');
@@ -186,11 +222,19 @@ export function App() {
               {saved.map((message) => <article className={'message ' + message.role} key={message.id}>
                 <header><strong>{message.role === 'user' ? 'You' : 'Continuum'}</strong><time dateTime={message.logicalAt}>{dateFormat.format(new Date(message.logicalAt))}</time>{message.origin !== 'real' && <span className="badge">{message.origin === 'fake' ? 'Fake' : 'Sample'}</span>}</header>
                 {message.content && (message.role === 'assistant' ? <AssistantText content={message.content} /> : <p>{message.content}</p>)}
+                <Sources sources={message.evidence ?? []} />
                 {statusLabel(message) && <span className="badge state">{statusLabel(message)}</span>}
               </article>)}
               {transient && <>
                 <article className="message user"><header><strong>You</strong></header><p>{transient.question}</p></article>
-                <article className="message assistant"><header><strong>Continuum</strong></header><p>{transient.answer || 'Waiting for response…'}</p></article>
+                <article className="message assistant">
+                  <header><strong>Continuum</strong></header>
+                  {Object.keys(transient.searches).length > 0 && <ul className="search-progress" aria-label="Search progress" aria-live="polite">
+                    {Object.entries(transient.searches).map(([id, item]) => <li key={id}>{item.result ?? 'Searching'} · {item.query}</li>)}
+                  </ul>}
+                  <p className="stream-text">{transient.answer || 'Waiting for response…'}</p>
+                  <Sources sources={transient.sources} />
+                </article>
               </>}
               <div ref={end} />
             </section>

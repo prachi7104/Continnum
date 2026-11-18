@@ -80,11 +80,11 @@ A second run masked both provider keys. Hono reported `missing_key`, Chromium sh
 
 ## Remaining work
 
-Commit the browser test teardown fix and final verification evidence. Node 22 and hosted CI were not run. Per-model limits in the owner's AI Studio dashboard were not observed. Phase 2 has not started.
+Phase 1 closed at `f600734ea256603896b0f26bf1e3d769d150e7da`, which records the browser teardown fix and final verification evidence. Node 22 and hosted CI were not run. Per-model limits in the owner's AI Studio dashboard were not observed. Phase 2 implementation and verification are tracked in [PHASE-2-MILESTONE.md](PHASE-2-MILESTONE.md).
 
 ## Environment recovery attempt
 
-The earlier environment and verification observations are retained below.
+These historical observations predate the native installation, loopback verification, and local Git closeout. The pinned verification results above supersede the earlier cached checks and browser bridge. Managed Git writes still require native execution.
 
 | Check | Recovery result |
 |---|---|

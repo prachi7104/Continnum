@@ -74,3 +74,10 @@ h1 { font-family: Georgia, serif; font-size: clamp(28px, 4vw, 46px); letter-spac
   .banner { padding-inline: 14px; }
   .messages, .composer-content { padding-inline: 12px; }
 }
+.sources { margin-top: .85rem; overflow-wrap: anywhere; }
+.sources h3 { margin: 0 0 .4rem; font-size: .88rem; }
+.sources details { margin: .35rem 0; }
+.sources summary { cursor: pointer; }
+.sources summary small { display: inline-block; margin-left: .3rem; }
+.search-progress { padding-left: 1.15rem; }
+.stream-text { white-space: pre-wrap; }

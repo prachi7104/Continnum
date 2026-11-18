@@ -70,18 +70,18 @@ function paused(onAbort: () => void): ModelProvider {
 test('success persists text, warnings and monotonic stats in one terminal event', async () => {
   const db = setup(basic);
   try {
-    const result = await events(await db.app.request(db.path, db.input('a', 'Latest Node version?')));
-    assert.deepEqual(result.map((frame) => frame.type), ['turn.started', 'answer.delta', 'answer.delta', 'turn.completed']);
-    assert.deepEqual(result.map((frame) => frame.seq), [1, 2, 3, 4]);
+    const result = await events(await db.app.request(db.path, db.input('a', 'hello')));
+    assert.deepEqual(result.map((frame) => frame.type), ['turn.started', 'answer.delta', 'turn.completed']);
+    assert.deepEqual(result.map((frame) => frame.seq), [1, 2, 3]);
     assert.equal(new Set(result.map((frame) => frame.turnId)).size, 1);
     const terminal = result.at(-1);
     assert.ok(terminal?.type === 'turn.completed');
     const { attempts, generations, modelUsed, route, tFirstAnswerTextMs, tFirstProgressMs, tTotalMs } = terminal.stats;
-    assert.deepEqual({ attempts, generations, modelUsed, route }, { attempts: 1, generations: 1, modelUsed: 'one', route: 'research' });
+    assert.deepEqual({ attempts, generations, modelUsed, route }, { attempts: 1, generations: 1, modelUsed: 'one', route: 'chat_plain' });
     assert.ok(tFirstProgressMs !== null && tFirstAnswerTextMs !== null && tFirstProgressMs <= tFirstAnswerTextMs && tFirstAnswerTextMs <= tTotalMs);
     const row = db.repo.detail(db.id)?.messages[1];
     assert.equal(row?.status, 'complete');
-    assert.match(String(row?.content), /^Web research isn't built/);
+    assert.equal(row?.content, 'response');
     assert.deepEqual(row?.stats, terminal.stats);
   } finally { db.close(); }
 });

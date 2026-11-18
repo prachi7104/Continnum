@@ -5,8 +5,10 @@ import { workspaceSchema, turnRequest, type ErrorCode } from '../../../shared/ev
 import { type LogicalClock, type Monotonic, type WallClock } from '../clock.ts';
 import type { Repo } from '../db/repo.ts';
 import { classify } from '../engine/route.ts';
+import type { TurnLimits } from '../engine/budget.ts';
 import { runTurn } from '../engine/turn.ts';
 import type { ModelProvider } from '../llm/provider.ts';
+import type { SearchProvider } from '../search/provider.ts';
 import { turnStream } from './sse.ts';
 
 const bodyLimit = 32 * 1024;
@@ -15,6 +17,8 @@ class BodyTooLarge extends Error {}
 type AppOptions = {
   repo: Repo; logical: LogicalClock; wall: WallClock; monotonic: Monotonic; deadlineMs: number;
   model: ModelProvider | null; fakeMode: boolean; hasGeminiKey: boolean; hasTavilyKey: boolean;
+  search?: SearchProvider | null;
+  turnLimits?: TurnLimits;
   labEnabled: boolean;
 };
 

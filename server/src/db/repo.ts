@@ -5,6 +5,8 @@ import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { localDate, type LabAnchor, type LabStore, type WallClock, type Workspace } from '../clock.ts';
 import { migrate } from './migrate.ts';
+import type { EvidenceSource } from '../../../shared/events.ts';
+import type { StoredSource } from '../evidence/sources.ts';
 
 type Origin = 'real' | 'fake' | 'sample';
 type Conversation = { id: string; title: string; workspace: Workspace; origin: Origin; updatedLogicalAt: string };
@@ -95,8 +97,21 @@ export class Repo implements LabStore {
     const rows = this.db.prepare(`SELECT id, role, content, status, terminal_code AS terminalCode,
       origin, logical_at AS logicalAt, recorded_at AS recordedAt, tz, local_date AS localDate, route,
       reply_to AS replyTo, stats_json FROM messages WHERE conversation_id=? ORDER BY rowid`).all(id) as MessageRow[];
+    const byMessage = new Map<string, EvidenceSource[]>();
+    for (const row of this.db.prepare(`SELECT e.* FROM evidence e JOIN messages m ON m.id=e.message_id
+      WHERE m.conversation_id=? ORDER BY e.ordinal`).all(id)) {
+      const messageId = String(row.message_id);
+      const items = byMessage.get(messageId) ?? [];
+      items.push({
+        ref: 'E' + row.ordinal, url: String(row.url), title: String(row.title ?? ''), domain: String(row.domain),
+        domainMatch: row.domain_match === 'exact' ? 'exact' : 'none', entity: String(row.entity ?? ''),
+        retrievedAt: String(row.retrieved_at), publishedAt: row.published_at === null ? null : String(row.published_at),
+        sentences: JSON.parse(String(row.sentences_json)) as string[],
+      });
+      byMessage.set(messageId, items);
+    }
     const messages = rows.map(({ stats_json, ...row }) => ({
-      ...row, evidence: [], stats: stats_json === null ? null : JSON.parse(stats_json) as unknown,
+      ...row, evidence: byMessage.get(row.id) ?? [], stats: stats_json === null ? null : JSON.parse(stats_json) as unknown,
     }));
     return { conversation, messages };
   }
@@ -157,6 +172,24 @@ export class Repo implements LabStore {
       .run(text, turn.assistantMessageId);
   }
 
+  appendSentence(turn: Turn, text: string, refs: string[]) {
+    this.write(() => {
+      this.append(turn, text);
+      const insert = this.db.prepare('INSERT OR IGNORE INTO citations (message_id, ref) VALUES (?, ?)');
+      for (const ref of refs) insert.run(turn.assistantMessageId, ref);
+    });
+  }
+
+  saveEvidence(turn: Turn, sources: readonly StoredSource[], provider: string) {
+    this.write(() => {
+      const insert = this.db.prepare(`INSERT INTO evidence (id,message_id,ordinal,entity,query,url,title,domain,
+        domain_match,sentences_json,published_at,retrieved_at,provider,origin) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
+      for (const source of sources) insert.run(randomUUID(), turn.assistantMessageId, Number(source.ref.slice(1)),
+        source.entity, source.query, source.url, source.title, source.domain, source.domainMatch,
+        JSON.stringify(source.sentences), source.publishedAt, source.retrievedAt, provider, this.origin);
+    });
+  }
+
   finish(turn: Turn, code: string, status: string, stats: unknown): boolean {
     return this.write(() => {
       const changed = this.db.prepare(`UPDATE turns SET status='done', terminal_code=?, ended_real=?
@@ -169,10 +202,10 @@ export class Repo implements LabStore {
     });
   }
 
-  startAttempt(turn: Turn, provider: string, model: string): string {
+  startAttempt(turn: Turn, provider: string, model: string | null, kind: 'generation' | 'search' = 'generation'): string {
     const id = randomUUID();
     this.db.prepare(`INSERT INTO attempts (id, turn_id, kind, provider, model, started_real)
-      VALUES (?, ?, 'generation', ?, ?, ?)`).run(id, turn.id, provider, model, this.wall.nowIso());
+      VALUES (?, ?, ?, ?, ?, ?)`).run(id, turn.id, kind, provider, model, this.wall.nowIso());
     return id;
   }
 

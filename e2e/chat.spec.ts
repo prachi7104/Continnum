@@ -28,3 +28,24 @@ test('scripted answer streams and persists across reload at 360 px', async ({ pa
   }
   expect(errors).toEqual([]);
 });
+
+test('research shows actual search progress and inspectable sources after reload', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('FAKE PROVIDERS:', { exact: false })).toBeVisible();
+  const input = page.getByRole('textbox', { name: 'Message' });
+  await input.fill('What is the latest Continuum news?');
+  await input.press('Enter');
+  await expect(page.getByRole('list', { name: 'Search progress' })).toContainText('Searching');
+  await expect(page.getByRole('button', { name: 'Stop' })).toHaveCount(0);
+  const answer = page.locator('.assistant');
+  await expect(answer).toContainText('scripted research demo');
+  await expect(answer).not.toContainText('Unverified preliminary');
+  const source = page.getByText('Scripted research source', { exact: false });
+  await expect(source).toContainText('example.com');
+  await source.click();
+  await expect(page.getByText('Retrieved', { exact: false })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Open source' })).toHaveAttribute('href', 'https://example.com/qualification');
+  await page.reload();
+  await expect(answer).toContainText('scripted research demo');
+  await expect(source).toBeVisible();
+});

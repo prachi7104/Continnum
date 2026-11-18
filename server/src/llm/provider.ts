@@ -1,10 +1,18 @@
-// Shared streaming model contract and provider error classification.
+// Shared streaming chat and single-step research contracts.
+import type { ModelMessage as SDKMessage } from 'ai';
+
 export type ModelMessage = { role: 'user' | 'assistant'; content: string };
 export type ModelRequest = { model: string; system: string; messages: ModelMessage[] };
+export type ToolCall = { id: string; query: string; entity: string; toolName?: string };
+export type ResearchChunk = string | { activity: true } | { calls: ToolCall[]; messages: SDKMessage[] };
+export type ResearchMode = 'required' | 'auto' | 'none' | 'omitted';
+export type ResearchRequest = Omit<ModelRequest, 'messages'> & { messages: SDKMessage[]; mode: ResearchMode };
 export interface ModelProvider {
   readonly name: string;
   readonly models: readonly string[];
   generate(input: ModelRequest, signal: AbortSignal): AsyncIterable<string>;
+  research?(input: ResearchRequest, signal: AbortSignal): AsyncIterable<ResearchChunk>;
+  acceptsOmittedTools?(model: string): boolean;
 }
 
 export class ModelFailure extends Error {

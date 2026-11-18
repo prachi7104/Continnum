@@ -1,4 +1,4 @@
-// Validates the Phase 1 event and request contracts on both sides of the connection.
+// Validates the event and request contracts on both sides of the connection.
 import { z } from 'zod';
 
 export const workspaceSchema = z.enum(['live', 'lab']);
@@ -14,10 +14,26 @@ export type ErrorCode = z.infer<typeof errorCode>;
 
 const id = z.uuid();
 const timing = z.number().nonnegative();
+export const evidenceSchema = z.object({
+  ref: z.string().regex(/^E[1-9]\d*$/), url: z.httpUrl(), title: z.string(), domain: z.string(),
+  domainMatch: z.enum(['exact', 'none']), entity: z.string(), retrievedAt: z.iso.datetime(),
+  publishedAt: z.iso.datetime().nullable(), sentences: z.array(z.string()),
+});
+export type EvidenceSource = z.infer<typeof evidenceSchema>;
+export const coverageSchema = z.object({
+  entity: z.string(), queried: z.boolean(), evidenceFound: z.boolean(), supported: z.boolean(),
+});
+export type Coverage = z.infer<typeof coverageSchema>;
 export const statsSchema = z.object({
   generations: z.number().int().nonnegative(), attempts: z.number().int().nonnegative(),
   modelUsed: z.string().nullable(), route: routeSchema, tFirstProgressMs: timing.nullable(),
   tFirstAnswerTextMs: timing.nullable(), tTotalMs: timing,
+  modelHistory: z.array(z.string()).optional(),
+  searches: z.number().int().nonnegative().optional(),
+  searchCredits: z.number().int().nonnegative().optional(),
+  rounds: z.number().int().nonnegative().optional(),
+  withheld: z.number().int().nonnegative().optional(),
+  coverage: z.array(coverageSchema).optional(),
 });
 export type Stats = z.infer<typeof statsSchema>;
 
@@ -32,7 +48,15 @@ export const eventSchema = z.discriminatedUnion('type', [
   z.object({ ...envelope, type: z.literal('turn.started'), userMessageId: id, assistantMessageId: id,
     workspace: workspaceSchema, logicalNow: z.iso.datetime(), realNow: z.iso.datetime(), tz: z.string(), route: routeSchema }),
   z.object({ ...envelope, type: z.literal('answer.delta'), text: z.string().min(1) }),
-  z.object({ ...envelope, type: z.literal('turn.completed'), assistantMessageId: id, stats: statsSchema }),
+  z.object({ ...envelope, type: z.literal('search.started'), queryId: id, query: z.string(), entity: z.string(), round: z.number().int().positive() }),
+  z.object({ ...envelope, type: z.literal('search.finished'), queryId: id, resultCount: z.number().int().nonnegative(), ms: timing,
+    error: z.literal('SEARCH_UNAVAILABLE').optional() }),
+  z.object({ ...envelope, type: z.literal('sources'), sources: z.array(evidenceSchema) }),
+  z.object({ ...envelope, type: z.literal('answer.sentence'), text: z.string().min(1), refs: z.array(z.string()),
+    support: z.enum(['sourced', 'no_source']) }),
+  z.object({ ...envelope, type: z.literal('answer.withheld'), count: z.number().int().positive() }),
+  z.object({ ...envelope, type: z.literal('turn.completed'), assistantMessageId: id, stats: statsSchema,
+    coverage: z.array(coverageSchema).optional() }),
   z.object({ ...envelope, type: z.literal('turn.error'), code: errorCode, message: z.string(), partialSaved: z.boolean() }),
 ]);
 export type TurnEvent = z.infer<typeof eventSchema>;
@@ -55,6 +79,7 @@ export const messageSchema = z.object({
   terminalCode: z.union([errorCode, z.literal('COMPLETED')]).nullable(),
   logicalAt: z.iso.datetime(), recordedAt: z.iso.datetime(), tz: z.string(), origin: originSchema,
   stats: statsSchema.nullable().optional(),
+  evidence: z.array(evidenceSchema).optional(),
 });
 export const detailSchema = z.object({ conversation: conversationSchema.extend({ workspace: workspaceSchema }), messages: z.array(messageSchema) });
 export const apiErrorSchema = z.object({ code: errorCode, message: z.string() });
