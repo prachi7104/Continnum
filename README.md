@@ -13,7 +13,7 @@ npm run dev
 
 Open <http://127.0.0.1:5173>. The API listens on loopback port 8787 by default. The app creates the database on first boot. The sidebar opens saved conversations, and Stop or Esc cancels the current response.
 
-For local provider qualification, copy `.env.example` to `.env`. Set `GEMINI_API_KEY` with a Google AI Studio key from a project without billing and `TAVILY_API_KEY` with a free-plan key. Run `npm run doctor` and then `npm run doctor -- --full`. The run records attempts before dispatch and writes measured results in [provider qualification](docs/PROVIDER-QUALIFICATION.md). Gemini chat wiring is gated on a passing qualification. The app supports keyless startup and opening history.
+For local provider qualification, copy `.env.example` to `.env`. Set `GEMINI_API_KEY` with a Google AI Studio key from a project without billing and `TAVILY_API_KEY` with a free-plan key. Run `npm run doctor` and then `npm run doctor -- --full`. The run records attempts before dispatch and writes measured results in [provider qualification](docs/PROVIDER-QUALIFICATION.md). Set `CONTINUUM_MODELS` in `.env` to the qualified order from that report to enable Gemini chat. The app supports keyless startup and opening history.
 
 For scripted testing, set `CONTINUUM_FAKE_PROVIDERS=1` in the process environment. The app displays a persistent fake-provider banner and uses `continuum-fake.db`.
 

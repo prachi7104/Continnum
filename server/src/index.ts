@@ -5,6 +5,7 @@ import { config } from './config.ts';
 import { createApp } from './api/routes.ts';
 import { Repo } from './db/repo.ts';
 import { fakeModel } from './llm/fake.ts';
+import { geminiModel } from './llm/gemini.ts';
 
 const [major, minor] = process.versions.node.split('.').map(Number);
 if (major !== 24 && !(major === 22 && minor >= 13)) {
@@ -13,7 +14,8 @@ if (major !== 24 && !(major === 22 && minor >= 13)) {
 }
 
 const settings = config(process.env);
-const model = settings.fakeMode ? fakeModel : null;
+const model = settings.fakeMode ? fakeModel
+  : settings.geminiKey && settings.geminiModels.length ? geminiModel(settings.geminiKey, settings.geminiModels) : null;
 const repo = new Repo(settings.dir, settings.fakeMode, wallClock);
 const app = createApp({
   repo, model, wall: wallClock, logical: new LogicalClock(repo, wallClock), monotonic,

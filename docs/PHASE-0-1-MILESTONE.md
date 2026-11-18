@@ -4,13 +4,13 @@
 
 | Phase | Status | Outcome |
 |---|---|---|
-| Phase 0 | **PARTIAL** | Copied the current handoff, verified SQLite, froze the evaluation fixtures in Git, verified the locked dependencies, and implemented the persistent qualification ledger and doctor. Live qualification is pending. |
-| Phase 1 | **PARTIAL** | Implemented the offline browser client, API, schema, fake streaming, turn lifecycle, clocks, typed errors, idempotency and fallback orchestration. Pinned unit and integration verification passed. Real Gemini wiring follows a passing Phase 0 qualification. |
+| Phase 0 | **QUALIFICATION PASS** | Frozen fixtures, locked dependencies, SQLite checks, persistent ledger, and both live doctor modes verified. Per-model limits in the owner’s AI Studio dashboard were not observed. |
+| Phase 1 | **PARTIAL** | The local chat slice streams real Gemini answers and persists turns. The live browser check and 24 unit and integration tests passed. The stock CI exit and a fresh combined dev startup still need verification. |
 
 ## Repository and environment
 
 - Workspace is `E:\projects\Continuum`.
-- Branch is `main`. Native PowerShell created the root fixture freeze commit `00a4d3d32d7b5e674e046a382a146ba7ab7cb23f`. The managed session can read that commit. The rest of the implementation is still in the working tree.
+- Branch is `main`. The fixture freeze is `00a4d3d32d7b5e674e046a382a146ba7ab7cb23f`. The offline baseline is `7f2313f482dec3cb222f3246549bdf26b0cd8922`. Qualification evidence and live wiring follow as separate checkpoints.
 - `origin` is [prachi7104/Continnum](https://github.com/prachi7104/Continnum). GitHub metadata confirmed an empty private repository. No remote write or GitHub Actions run took place.
 - The owner-specified workspace and remote supersede the handoff's original location and local-only remote default. The ZIP supplied all seven authoritative v1.1 documents.
 - Windows NT 10.0.26300 x64, Node 24.11.0, npm 11.6.1, Git 2.46.2, SQLite 3.50.4. Initial free RAM was 0.73 GiB of 7.73 GiB. Free disk was 43.75 GiB on C: and 69.15 GiB on E:. The Git identity was configured.
@@ -18,17 +18,17 @@
 
 ## Qualification and budget
 
-Both key settings are present in the ignored project-root `.env`. Configured quick and full doctor runs could not import the pinned SDK. DNS also failed for the Gemini and Tavily endpoints. There is no selected model order, supported final-generation variant, measured latency, or owner-observed rate limit. Credentials remain local.
+The owner confirmed both configured accounts are on free plans. The ignored project-root `.env` is configured with `gemini-3.5-flash-lite,gemini-3.6-flash` after both models qualified. Gemini 3.5 Flash Lite accepted both final variants. Gemini 3.6 Flash accepted explicit tool disabling and timed out when tools were omitted. Full timings and all probe outcomes are in [PROVIDER-QUALIFICATION.md](PROVIDER-QUALIFICATION.md).
 
 | Stage | Provider | Physical attempts or credits used | Remaining |
 |---|---|---:|---:|
-| Phase 0 | Gemini | 0 | 24 |
-| Phase 0 | Tavily | 0 | 5 |
+| Phase 0 | Gemini | 20 | 4 |
+| Phase 0 | Tavily | 2 | 3 |
 | Phase 0 | Groq | 0 | 0 |
-| Phase 1 live verification | Gemini | 0 | 10 |
+| Phase 1 live verification | Gemini | 2 | 8 |
 | Phase 1 live verification | Tavily / Groq | 0 | 0 |
 
-When credentials were masked for the subprocesses, `npm run doctor` and `npm run doctor -- --full` both passed the offline checks and reported the missing-key gate. Both commands were also rerun after the pinned install. The persistent ledger remained at zero. The cap and cross-process final-slot reservation test passed using throwaway ledgers.
+Both doctor modes previously passed with credentials masked. After free-plan confirmation, the quick live smoke passed and the full doctor returned `qualification: PASS`. The cap and cross-process final-slot reservation test passed using throwaway ledgers.
 
 ## Verification evidence
 
@@ -41,33 +41,48 @@ When credentials were masked for the subprocesses, `npm run doctor` and `npm run
 ### Verification with the pinned dependencies
 
 - TypeScript, ESLint, SQLite integrity and the frozen corpus check passed. Vitest passed all 23 tests across four files. The pinned Hono adapter passed the real HTTP disconnect test.
+- A clean archive of the committed offline baseline passed `npm ci` and all 23 tests. Vitest needed a path without the managed temporary directory's `#` character.
+- After wiring the qualified Gemini adapter, TypeScript and all 24 Vitest tests passed. The new adapter test verified one SDK fetch, two streamed text chunks and no registered tools.
 - The first Playwright run reached the app and stopped at browser launch because the pinned Chromium revision was missing.
 - With Chromium installed, Playwright exposed overlapping streamed and persisted messages during a sidebar refresh. The UI now switches to the persisted transcript in the same React update that clears the transient turn. The Chromium smoke passed in 3.7 seconds against real Vite and Hono servers over loopback using an external-server test configuration. It verified the streamed response, focus and persistence after reload at 360 px. The optional on-disk path assertion was skipped in that run. The stock CI invocation stalled during Playwright teardown in the managed session and was interrupted. Its exit status still needs a native run.
+
+### Live Gemini browser verification
+
+Using Chromium, local Vite and Hono, and an isolated SQLite database, both turns streamed, rendered, and persisted as `COMPLETED`. Each recorded one generation and one Gemini attempt using `gemini-3.5-flash-lite`.
+
+| Route | SSE answer deltas | First progress (ms) | First answer (ms) | Total (ms) | Research prefix |
+|---|---:|---:|---:|---:|---|
+| `chat_plain` | 2 | 1 | 7406 | 7438 | Absent |
+| `research` | 5 | 0 | 1156 | 1265 | Present |
+
+The managed check initially found that Node's dotenv parser could not read the newly inserted model setting. A newline was restored and the parsed values were checked before starting the live run. The failed readiness check issued no provider request.
+
+A second run masked both provider keys. Hono reported `missing_key`, Chromium showed the unavailable-model notice and `NOT_CONFIGURED` for a chat turn, and the isolated database had zero attempt rows.
 
 ## Phase 1 acceptance criteria
 
 | # | Status | Evidence or blocker |
 |---|---|---|
-| 1 | **BLOCKED** | The exact dependency install failed at DNS. Fresh two-process startup is unverified. |
-| 2 | **PARTIAL** | Keyless Hono boot, health `missing_key`, `NOT_CONFIGURED` and zero attempts verified in-process. The UI banner is implemented. The full browser path awaits Vite and loopback access. |
-| 3 | **BLOCKED** | No qualified Gemini model or live chat observation. The mocked streaming test verified the stored route, generation count, model ID, three monotonic timings and current-information prefix. |
+| 1 | **PARTIAL** | A clean offline baseline archive passed `npm ci`. Vite and Hono were started separately for browser verification. Combined `npm run dev` startup from a fresh checkout remains unverified. |
+| 2 | **PASS** | Real-loopback browser verification with both keys masked confirmed `missing_key`, the keyless notice, `NOT_CONFIGURED`, and zero provider attempts. |
+| 3 | **PASS** | Real Gemini answers streamed through the browser and persisted the selected model, one generation, route and three monotonic timings. The current-information prompt displayed the research prefix. |
 | 4 | **PASS** | In-process Stop cancellation and a real HTTP disconnect both aborted the scripted provider, saved partial text, released the lock, and allowed the next turn. |
 | 5 | **PASS (offline)** | The file-backed recovery test reopened the database, retained partial content, set `INTERRUPTED`, admitted a new turn and recreated an empty database after removal. |
 | 6 | **PASS (in-process)** | Same client turn ID returned `DUPLICATE_TURN` during and after the turn, with one message pair and one attempt. |
 | 7 | **PASS (offline)** | Composite FK mismatch rejected. Conversation deletion removed all dependent rows, and FTS integrity checks passed. |
-| 8 | **PARTIAL** | Both doctor modes ran keyless. Configured runs stopped before dispatch. Measured provider results are blocked. The ledger is within all caps. |
-| 9 | **PARTIAL** | Pinned static checks, 23 tests and the real-loopback browser smoke passed. Native stock CI exit and fresh-checkout verification remain pending. |
+| 8 | **PASS** | Quick and full live doctor runs completed. The full gate passed, with 20/24 Gemini attempts and 2/5 Tavily credits. |
+| 9 | **PARTIAL** | Pinned static checks, 24 tests and the real-loopback browser smoke passed. Stock CI exit remains pending. |
 | 10 | **PASS** | Fixture files and checker passed. The freeze commit and all five committed-blob SHA-256 hashes are recorded in [DECISIONS.md](DECISIONS.md). Resolver and retrieval implementation has not started. |
 | 11 | **PASS** | Native npm generated the v3 lockfile. All 21 exact pins match the manifest, the lockfile and the installed versions. |
 | 12 | **PASS (documents)** | `ENVIRONMENT.md`, `DECISIONS.md`, `PROVIDER-QUALIFICATION.md` and `qualification-ledger.json` are present and record the observed state. |
 
 ## Remaining work
 
-Commit the offline baseline and verify stock CI from native PowerShell. Record provider qualification as its own commit. Once Gemini qualifies, wire live chat and verify it within its separate 10-request limit, then commit the integration and its evidence. The owner still needs to confirm the AI Studio free-tier rate limits. Phase 2 has not started.
+Record provider qualification and live integration as separate native Git commits. Verify stock CI and combined dev startup from a fresh checkout. Per-model limits in the owner's AI Studio dashboard were not observed. Phase 2 has not started.
 
 ## Environment recovery attempt
 
-**Phase 0 remains PARTIAL. Phase 1 remains PARTIAL.** The acceptance table above still applies. The earlier test observations are retained.
+The earlier environment and verification observations are retained below.
 
 | Check | Recovery result |
 |---|---|
@@ -78,9 +93,9 @@ Commit the offline baseline and verify stock CI from native PowerShell. Record p
 | Disk and memory | **MEASURED**. 39.60 GiB free on C:, 69.08 GiB free on E:, and 0.68 GiB of 7.73 GiB RAM free at inspection. Memory remains relevant to Chromium. |
 | Native Windows comparison | **PASS**. DNS succeeded for npm, Gemini, and Tavily. npm registry ping returned PONG in 386 ms, loopback returned HTTP 200, and native Git writes succeeded. Free RAM was 0.77 GiB, with 38.77 GiB free on C: and 69.07 GiB on E:. |
 | Fixture freeze | **PASS**. The root commit and all five committed SHA-256 hashes are recorded in [DECISIONS.md](DECISIONS.md). The resolver and retrieval implementation are absent. |
-| Exact installation | **PASS**. Native npm installed the dependencies and generated `package-lock.json`. All 21 exact direct pins match the installed versions. A fresh checkout install is pending. |
-| Qualification | **NOT RUN**. The ledger has zero entries. The SDK is installed and provider DNS resolves. Free-plan confirmation and live probes are pending. |
-| Pinned checks and fresh installation | TypeScript, ESLint, SQLite, corpus and all 23 Vitest tests passed. The fresh checkout install remains pending. |
+| Exact installation | **PASS**. Native npm installed the dependencies and generated `package-lock.json`. All 21 exact direct pins match the installed versions. |
+| Qualification | **PASS**. Quick and full live probes completed after free-plan confirmation. |
+| Pinned checks and fresh installation | The committed offline baseline passed a fresh `npm ci` and all 23 Vitest tests. Stock browser CI exit remains pending. |
 
 The Git ignore rules cover credential environment files, SQLite databases and sidecars, logs, browser sessions and authentication states, temporary test data, provider transcripts and installed packages. Eleven `git check-ignore` probes passed, and `.env.example` remains eligible for staging.
 
@@ -105,12 +120,12 @@ The Git ignore rules cover credential environment files, SQLite databases and si
 
 | Provider or candidate | Gate | Observation |
 |---|---|---|
-| `gemini-3.8-flash` | **NOT RUN** | Free-plan confirmation and live probes pending. |
-| `gemini-3.6-flash` | **NOT RUN** | Free-plan confirmation and live probes pending. |
-| `gemini-3.5-flash-lite` | **NOT RUN** | Free-plan confirmation and live probes pending. |
-| Tavily basic search | **NOT RUN** | Free-plan confirmation and live probe pending. |
+| `gemini-3.8-flash` | **NOT QUALIFIED** | Structured output timed out. |
+| `gemini-3.6-flash` | **PASS** | Qualified with `toolChoice: 'none'`. |
+| `gemini-3.5-flash-lite` | **PASS** | Qualified with both final variants and the lowest first-text latency in the full run. |
+| Tavily basic search | **PASS** | Quick and full live result checks passed. |
 
-No model order was selected. Streaming latency, parallel tools, tool-result history, tool disabling, structured output and cancellation all await measurements.
+Live chat tries `gemini-3.5-flash-lite` first, then `gemini-3.6-flash`.
 
 ## Native PowerShell commands
 

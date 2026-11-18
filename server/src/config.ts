@@ -17,6 +17,7 @@ export function config(env: NodeJS.ProcessEnv) {
     fakeMode: env.NODE_ENV === 'test' || env.CONTINUUM_FAKE_PROVIDERS === '1',
     labEnabled: env.TIMELINE_LAB !== '0',
     geminiKey: env.GEMINI_API_KEY?.trim() || '',
+    geminiModels: [...new Set((env.CONTINUUM_MODELS ?? '').split(',').map((model) => model.trim()).filter(Boolean))],
     tavilyKey: env.TAVILY_API_KEY?.trim() || '',
   };
 }
