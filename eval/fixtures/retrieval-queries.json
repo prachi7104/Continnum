@@ -1,0 +1,593 @@
+[
+  {
+    "id": "Q01",
+    "text": "What did I ask you on 3 November?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C04",
+      "C05"
+    ],
+    "gold": "C04, C05"
+  },
+  {
+    "id": "Q02",
+    "text": "What did we discuss on 10 Nov?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C02",
+      "C03"
+    ],
+    "gold": "C02, C03"
+  },
+  {
+    "id": "Q03",
+    "text": "What did I ask on 5 November?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "EMPTY_RANGE",
+    "required": [],
+    "gold": "nearest: Nov 3, Nov 2, Nov 9 (v1.0 listed only two)"
+  },
+  {
+    "id": "Q04",
+    "text": "What did I ask on 12 Nov?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "EMPTY_RANGE",
+    "required": [],
+    "gold": "nearest: Nov 11, Nov 13, Nov 10 (tie with Nov 14 → earlier)"
+  },
+  {
+    "id": "Q05",
+    "text": "On Monday we shortlisted CRM tools; has anything changed?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C01",
+      "C12"
+    ],
+    "gold": "C01, C12 (merged; same interval, shared term)"
+  },
+  {
+    "id": "Q06",
+    "text": "Last Tuesday I asked about Postgres hosting; has pricing changed?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C02"
+    ],
+    "gold": "C02"
+  },
+  {
+    "id": "Q07",
+    "text": "Last Tuesday I asked about Kafka",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NO_CONFIDENT_MATCH",
+    "required": [],
+    "gold": "lists the in-range topics of C02 and C03; must not claim no conversation"
+  },
+  {
+    "id": "Q08",
+    "text": "What did I ask yesterday?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C01",
+      "C12"
+    ],
+    "gold": "C01, C12"
+  },
+  {
+    "id": "Q09",
+    "text": "What did we talk about two weeks ago?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C04",
+      "C05"
+    ],
+    "gold": "C04, C05"
+  },
+  {
+    "id": "Q10",
+    "text": "The Postgres discussion from last week",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C02"
+    ],
+    "gold": "C02 required; C06 bonus"
+  },
+  {
+    "id": "Q11",
+    "text": "What did you tell me about Pinecone?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C09"
+    ],
+    "gold": "C09"
+  },
+  {
+    "id": "Q12",
+    "text": "The Node version you told me, is it still right?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C04"
+    ],
+    "gold": "C04 (C17 must not match: 1 of 2 terms)"
+  },
+  {
+    "id": "Q13",
+    "text": "Those managed database options for side projects",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C06"
+    ],
+    "gold": "C06"
+  },
+  {
+    "id": "Q14",
+    "text": "Is the Postgres answer still correct?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "AMBIGUOUS",
+    "required": [],
+    "gold": "options ⊇ {C02, C05} (tie on matched terms)"
+  },
+  {
+    "id": "Q15",
+    "text": "What did I ask about Kubernetes?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NO_CONFIDENT_MATCH",
+    "required": [],
+    "gold": "none; non-categorical wording"
+  },
+  {
+    "id": "Q16",
+    "text": "What did I ask in October?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C09",
+      "C14",
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20"
+    ],
+    "gold": "C09, C14, C15, C16, C17, C18, C19, C20"
+  },
+  {
+    "id": "Q17",
+    "text": "What has changed since our last discussion?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C12",
+      "C01"
+    ],
+    "gold": "C12 (newest completed episode; C01 shares a topic term, so not ambiguous; ARCHITECTURE §5.4)"
+  },
+  {
+    "id": "Q18",
+    "text": "What did I ask on 2 November?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C10"
+    ],
+    "gold": "C10"
+  },
+  {
+    "id": "Q19",
+    "text": "What did I ask on 2 November?",
+    "workspace": "lab",
+    "tz": "America/New_York",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C04"
+    ],
+    "gold": "**C04** (v1.0 said EMPTY_RANGE; that was wrong, because C04 is 22:45 on 2 Nov in New York)"
+  },
+  {
+    "id": "Q20",
+    "text": "What did I ask on 1 November?",
+    "workspace": "lab",
+    "tz": "America/New_York",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C10"
+    ],
+    "gold": "C10"
+  },
+  {
+    "id": "Q21",
+    "text": "Is your answer about GitHub's CEO still right?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C11"
+    ],
+    "gold": "C11"
+  },
+  {
+    "id": "Q22",
+    "text": "What did I ask on Monday about CRMs, the Monday before this one?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C08"
+    ],
+    "gold": "C08 (\"the Monday before this one\" = Nov 9; T22)"
+  },
+  {
+    "id": "Q23",
+    "text": "What did we discuss this month about CRMs?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C01",
+      "C08",
+      "C12"
+    ],
+    "gold": "C01, C08, C12"
+  },
+  {
+    "id": "Q24",
+    "text": "Is the packing advice from last Tuesday still valid?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_NO_BASELINE",
+    "required": [
+      "C03"
+    ],
+    "gold": "C03"
+  },
+  {
+    "id": "Q25",
+    "text": "What did I ask on 30 December?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "EMPTY_RANGE",
+    "required": [],
+    "gold": "nearest: Oct 15, Oct 24, Oct 26 (2026)"
+  },
+  {
+    "id": "Q26",
+    "text": "Summarise everything since Friday",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C07",
+      "C11",
+      "C01",
+      "C12"
+    ],
+    "gold": "C07, C11, C01, C12"
+  },
+  {
+    "id": "Q27",
+    "text": "What did I ask on Monday 16 Nov?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C01",
+      "C12"
+    ],
+    "gold": "C01, C12; **must not include C13** (live)"
+  },
+  {
+    "id": "Q28",
+    "text": "What did you say about GPU prices?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C10"
+    ],
+    "gold": "C10"
+  },
+  {
+    "id": "Q29",
+    "text": "Which of your previous recommendations are no longer valid?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND* (bounded scan)",
+    "required": [
+      "C12",
+      "C01",
+      "C11",
+      "C06",
+      "C02"
+    ],
+    "gold": "the 5 most recent checkable episodes within 30 days: C12, C01, C11, C06, C02"
+  },
+  {
+    "id": "Q30",
+    "text": "hello",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NOT_REQUESTED",
+    "required": [],
+    "gold": "—"
+  },
+  {
+    "id": "Q31",
+    "text": "What did I ask yesterday?",
+    "workspace": "lab",
+    "tz": "America/Los_Angeles",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C01",
+      "C12"
+    ],
+    "gold": "C01 only (C12 is 16 Nov 03:30 PST, which is \"today\" there)"
+  },
+  {
+    "id": "Q32",
+    "text": "What did I ask today?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-16T18:35:00.000Z",
+    "state": "EMPTY_RANGE",
+    "required": [],
+    "gold": "— (midnight boundary; nearest: Nov 16, Nov 14, Nov 13)"
+  },
+  {
+    "id": "Q33",
+    "text": "What did I ask today?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "EMPTY_RANGE",
+    "required": [],
+    "gold": "— (**the current request itself is excluded**, F11)"
+  },
+  {
+    "id": "P01",
+    "text": "What did you say about LLM API costs?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C14"
+    ],
+    "gold": "C14",
+    "tests": "acronym + synonym"
+  },
+  {
+    "id": "P02",
+    "text": "The token pricing for Gemini you looked up",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C14"
+    ],
+    "gold": "C14",
+    "tests": "entity reference"
+  },
+  {
+    "id": "P03",
+    "text": "Remind me what you found on S3 egress",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C15"
+    ],
+    "gold": "C15",
+    "tests": "entity + attribute"
+  },
+  {
+    "id": "P04",
+    "text": "What did we conclude about cloud storage bandwidth charges?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C15"
+    ],
+    "gold": "C15",
+    "tests": "low lexical overlap"
+  },
+  {
+    "id": "P05",
+    "text": "The transactional email services you compared",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C16"
+    ],
+    "gold": "C16",
+    "tests": "synonym"
+  },
+  {
+    "id": "P06",
+    "text": "Is your SendGrid answer still valid?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C16"
+    ],
+    "gold": "C16",
+    "tests": "entity, reverify"
+  },
+  {
+    "id": "P07",
+    "text": "Which JS runtime boots fastest, what did you say?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C17"
+    ],
+    "gold": "C17",
+    "tests": "low overlap"
+  },
+  {
+    "id": "P08",
+    "text": "The Bun vs Deno thing",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C17"
+    ],
+    "gold": "C17",
+    "tests": "entity reference"
+  },
+  {
+    "id": "P09",
+    "text": "The flat rent comparison in Bangalore",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C18"
+    ],
+    "gold": "C18",
+    "tests": "synonyms (flat, Bangalore)"
+  },
+  {
+    "id": "P10",
+    "text": "Free hosting limits for my static site, still right?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND_WITH_BASELINE",
+    "required": [
+      "C19"
+    ],
+    "gold": "C19",
+    "tests": "attribute, reverify"
+  },
+  {
+    "id": "P11",
+    "text": "What did you tell me about Heroku pricing?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NO_CONFIDENT_MATCH",
+    "required": [],
+    "gold": "none (must not return C19, C02 or C14)",
+    "tests": "related-topic distractor"
+  },
+  {
+    "id": "P12",
+    "text": "What did you say about cooking biryani?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NO_CONFIDENT_MATCH",
+    "required": [],
+    "gold": "none (must not return C20)",
+    "tests": "shared-word distractor"
+  },
+  {
+    "id": "P13",
+    "text": "What did I ask about Postgres pooling in October?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "NO_CONFIDENT_MATCH",
+    "required": [],
+    "gold": "none (C05 is in November)",
+    "tests": "date-boundary distractor"
+  },
+  {
+    "id": "P14",
+    "text": "The Vercel limits you mentioned",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C19"
+    ],
+    "gold": "C19",
+    "tests": "entity reference"
+  },
+  {
+    "id": "P15",
+    "text": "What did you tell me about rent prices?",
+    "workspace": "lab",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "state": "FOUND*",
+    "required": [
+      "C18"
+    ],
+    "gold": "C18",
+    "tests": "attribute reference"
+  }
+]

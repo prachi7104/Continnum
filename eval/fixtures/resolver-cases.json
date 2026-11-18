@@ -1,0 +1,468 @@
+[
+  {
+    "id": "T01",
+    "text": "on 3 November",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-03",
+        "localEnd": "2026-11-03",
+        "startUtc": "2026-11-02T18:30:00.000Z",
+        "endUtc": "2026-11-03T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-03 → [2026-11-02T18:30Z, 2026-11-03T18:30Z)"
+  },
+  {
+    "id": "T02",
+    "text": "Nov 3rd",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-03",
+        "localEnd": "2026-11-03",
+        "startUtc": "2026-11-02T18:30:00.000Z",
+        "endUtc": "2026-11-03T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "same as T01"
+  },
+  {
+    "id": "T03",
+    "text": "on 30 December",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2025-12-30",
+        "localEnd": "2025-12-30",
+        "startUtc": "2025-12-29T18:30:00.000Z",
+        "endUtc": "2025-12-30T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2025-12-30 (most recent past occurrence; unchanged from v1.0, consistent with the rule)"
+  },
+  {
+    "id": "T04",
+    "text": "yesterday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-16",
+        "localEnd": "2026-11-16",
+        "startUtc": "2026-11-15T18:30:00.000Z",
+        "endUtc": "2026-11-16T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-16"
+  },
+  {
+    "id": "T05",
+    "text": "on Monday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-16",
+        "localEnd": "2026-11-16",
+        "startUtc": "2026-11-15T18:30:00.000Z",
+        "endUtc": "2026-11-16T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-16"
+  },
+  {
+    "id": "T06",
+    "text": "last Tuesday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-10",
+        "localEnd": "2026-11-10",
+        "startUtc": "2026-11-09T18:30:00.000Z",
+        "endUtc": "2026-11-10T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-10"
+  },
+  {
+    "id": "T07",
+    "text": "last Tuesday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-19T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-17",
+        "localEnd": "2026-11-17",
+        "startUtc": "2026-11-16T18:30:00.000Z",
+        "endUtc": "2026-11-17T18:30:00.000Z"
+      }
+    ],
+    "alternates": [
+      {
+        "localStart": "2026-11-10",
+        "localEnd": "2026-11-10",
+        "startUtc": "2026-11-09T18:30:00.000Z",
+        "endUtc": "2026-11-10T18:30:00.000Z"
+      }
+    ],
+    "flags": [],
+    "gold": "2026-11-17, alternate 2026-11-10"
+  },
+  {
+    "id": "T08",
+    "text": "on Tuesday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-17",
+        "localEnd": "2026-11-17",
+        "startUtc": "2026-11-16T18:30:00.000Z",
+        "endUtc": "2026-11-17T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-17 (includes today)"
+  },
+  {
+    "id": "T09",
+    "text": "last week",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-09",
+        "localEnd": "2026-11-15",
+        "startUtc": "2026-11-08T18:30:00.000Z",
+        "endUtc": "2026-11-15T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-09 … 2026-11-15"
+  },
+  {
+    "id": "T10",
+    "text": "this week",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-16",
+        "localEnd": "2026-11-17",
+        "startUtc": "2026-11-15T18:30:00.000Z",
+        "endUtc": "2026-11-17T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-16 … 2026-11-17"
+  },
+  {
+    "id": "T11",
+    "text": "two weeks ago",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-03",
+        "localEnd": "2026-11-03",
+        "startUtc": "2026-11-02T18:30:00.000Z",
+        "endUtc": "2026-11-03T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-03"
+  },
+  {
+    "id": "T12",
+    "text": "3 days ago",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-14",
+        "localEnd": "2026-11-14",
+        "startUtc": "2026-11-13T18:30:00.000Z",
+        "endUtc": "2026-11-14T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-14"
+  },
+  {
+    "id": "T13",
+    "text": "in October",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-10-01",
+        "localEnd": "2026-10-31",
+        "startUtc": "2026-09-30T18:30:00.000Z",
+        "endUtc": "2026-10-31T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-10-01 … 2026-10-31"
+  },
+  {
+    "id": "T14",
+    "text": "this month",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-01",
+        "localEnd": "2026-11-17",
+        "startUtc": "2026-10-31T18:30:00.000Z",
+        "endUtc": "2026-11-17T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-01 … 2026-11-17"
+  },
+  {
+    "id": "T15",
+    "text": "since Friday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-13",
+        "localEnd": "2026-11-13",
+        "startUtc": "2026-11-12T18:30:00.000Z",
+        "endUtc": "2026-11-17T04:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "[2026-11-12T18:30Z, now)"
+  },
+  {
+    "id": "T16",
+    "text": "since our last discussion",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [],
+    "alternates": [],
+    "flags": [
+      "sinceLast"
+    ],
+    "gold": "DB-backed (ARCHITECTURE §5.4); resolver returns flag `sinceLast`"
+  },
+  {
+    "id": "T17",
+    "text": "on 2 November",
+    "tz": "America/New_York",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-02",
+        "localEnd": "2026-11-02",
+        "startUtc": "2026-11-02T05:00:00.000Z",
+        "endUtc": "2026-11-03T05:00:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "[2026-11-02T05:00Z, 2026-11-03T05:00Z)"
+  },
+  {
+    "id": "T18",
+    "text": "on 1 November",
+    "tz": "America/New_York",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-01",
+        "localEnd": "2026-11-01",
+        "startUtc": "2026-11-01T04:00:00.000Z",
+        "endUtc": "2026-11-02T05:00:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "[2026-11-01T04:00Z, 2026-11-02T05:00Z) (25-hour day; DST ends 1 Nov)"
+  },
+  {
+    "id": "T19",
+    "text": "what's the latest Node version?",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [],
+    "alternates": [],
+    "flags": [],
+    "gold": "No interval"
+  },
+  {
+    "id": "T20",
+    "text": "on 20 November",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2025-11-20",
+        "localEnd": "2025-11-20",
+        "startUtc": "2025-11-19T18:30:00.000Z",
+        "endUtc": "2025-11-20T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "**2025-11-20** (v1.0 said \"future → no range\"; that contradicted the rule)"
+  },
+  {
+    "id": "T21",
+    "text": "on 20 November 2026",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [],
+    "alternates": [],
+    "flags": [
+      "future"
+    ],
+    "gold": "No interval; flag `future`"
+  },
+  {
+    "id": "T22",
+    "text": "the Monday before this one",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-09",
+        "localEnd": "2026-11-09",
+        "startUtc": "2026-11-08T18:30:00.000Z",
+        "endUtc": "2026-11-09T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-09"
+  },
+  {
+    "id": "T23",
+    "text": "Monday before last",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-09",
+        "localEnd": "2026-11-09",
+        "startUtc": "2026-11-08T18:30:00.000Z",
+        "endUtc": "2026-11-09T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-09"
+  },
+  {
+    "id": "T24",
+    "text": "on 17 November",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-17",
+        "localEnd": "2026-11-17",
+        "startUtc": "2026-11-16T18:30:00.000Z",
+        "endUtc": "2026-11-17T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-17 (today is \"on or before today\")"
+  },
+  {
+    "id": "T25",
+    "text": "yesterday",
+    "tz": "America/Los_Angeles",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-15",
+        "localEnd": "2026-11-15",
+        "startUtc": "2026-11-15T08:00:00.000Z",
+        "endUtc": "2026-11-16T08:00:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-15 → [2026-11-15T08:00Z, 2026-11-16T08:00Z)"
+  },
+  {
+    "id": "T26",
+    "text": "yesterday",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-16T18:35:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-16",
+        "localEnd": "2026-11-16",
+        "startUtc": "2026-11-15T18:30:00.000Z",
+        "endUtc": "2026-11-16T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-16 → [2026-11-15T18:30Z, 2026-11-16T18:30Z) (midnight boundary)"
+  },
+  {
+    "id": "T27",
+    "text": "on 1 November",
+    "tz": "America/Los_Angeles",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-01",
+        "localEnd": "2026-11-01",
+        "startUtc": "2026-11-01T07:00:00.000Z",
+        "endUtc": "2026-11-02T08:00:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "[2026-11-01T07:00Z, 2026-11-02T08:00Z)"
+  },
+  {
+    "id": "T28",
+    "text": "what did I ask on Monday 16 Nov at noon?",
+    "tz": "Asia/Kolkata",
+    "now": "2026-11-17T04:30:00.000Z",
+    "intervals": [
+      {
+        "localStart": "2026-11-16",
+        "localEnd": "2026-11-16",
+        "startUtc": "2026-11-15T18:30:00.000Z",
+        "endUtc": "2026-11-16T18:30:00.000Z"
+      }
+    ],
+    "alternates": [],
+    "flags": [],
+    "gold": "2026-11-16; the time of day is ignored (not supported)"
+  }
+]

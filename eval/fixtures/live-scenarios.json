@@ -1,0 +1,142 @@
+{
+  "scenarios": [
+    {
+      "id": "L01",
+      "category": "Chat",
+      "procedure": "\"hi, how are you?\" (expect `chat_plain`, 0 searches)"
+    },
+    {
+      "id": "L02",
+      "category": "Conceptual",
+      "procedure": "\"Explain what a B-tree index is in two sentences.\" (expect `undecided`, 0 searches)"
+    },
+    {
+      "id": "L03",
+      "category": "Current fact",
+      "procedure": "\"What's the latest Node.js LTS version?\" (expect `research`)"
+    },
+    {
+      "id": "L04",
+      "category": "Multi-entity research",
+      "procedure": "\"Compare current entry-level pricing for Neon, Supabase and Railway Postgres.\" (expect all 3 entities covered or reported missing)"
+    },
+    {
+      "id": "L05",
+      "category": "Recent news",
+      "procedure": "\"What did Vercel announce this month?\""
+    },
+    {
+      "id": "L06",
+      "category": "**Official (a)**",
+      "procedure": "Start = a Monday → \"Shortlist 5 CRM tools for a 20-person sales team, with prices\" → +3 days → \"On Monday we shortlisted 5 CRM tools… changed pricing or shipped something big since?\""
+    },
+    {
+      "id": "L07",
+      "category": "**Official (b)**",
+      "procedure": "Start = Tue 3 Nov 2026 → a factual question → advance to Tue 17 Nov 2026 → \"What did I ask you on 3 November? Is your answer still correct today?\""
+    },
+    {
+      "id": "L08",
+      "category": "**Official (c)**",
+      "procedure": "Start = a Tuesday → \"Compare Postgres hosting pricing: Neon, Supabase, Railway\" → +7 days → \"Last Tuesday I asked you about Postgres hosting. Has any pricing changed since then?\""
+    },
+    {
+      "id": "L09",
+      "category": "Unrelated historical recall",
+      "procedure": "Two unrelated topics on two days → \"What did I ask on <date>?\" (only that day's)"
+    },
+    {
+      "id": "L10",
+      "category": "Relative recall",
+      "procedure": "→ \"What did we discuss last week?\""
+    },
+    {
+      "id": "L11",
+      "category": "Paraphrase recall",
+      "procedure": "\"managed DBs for side projects\" → +5 days → \"the Postgres options you gave me, still valid?\""
+    },
+    {
+      "id": "L12",
+      "category": "Non-price reverification",
+      "procedure": "\"Who is the CEO of GitHub?\" → +7 days → \"Is that still true?\""
+    },
+    {
+      "id": "L13",
+      "category": "Version reverification",
+      "procedure": "\"Latest stable Python?\" → +14 days → \"still correct?\""
+    },
+    {
+      "id": "L14",
+      "category": "Missing memory, explicit target",
+      "procedure": "Empty Lab → \"On Monday we shortlisted HubSpot and Pipedrive. Any pricing changes?\" (no invented Then; current info given)"
+    },
+    {
+      "id": "L15",
+      "category": "Ambiguous referent",
+      "procedure": "Two research topics on the same day → \"Is that answer from Tuesday still right?\" (expect clarify, then a selection continues it)"
+    },
+    {
+      "id": "L16",
+      "category": "Incomplete evidence",
+      "procedure": "A niche product → reverify (expect `unverified` rows and a useful partial answer)"
+    },
+    {
+      "id": "L17",
+      "category": "Conflicting sources",
+      "procedure": "A topic chosen by the owner with a browser search in Phase 2 (no API credits), and logged"
+    },
+    {
+      "id": "L18",
+      "category": "Same-thread follow-up",
+      "procedure": "\"those five tools: which has the best free plan?\""
+    },
+    {
+      "id": "L19",
+      "category": "Since last discussion",
+      "procedure": "→ \"What has changed since our last discussion?\""
+    },
+    {
+      "id": "L20",
+      "category": "Recommendations scan (P1)",
+      "procedure": "After L06, L08, L12 → \"Which of your previous recommendations are no longer valid?\""
+    },
+    {
+      "id": "L21",
+      "category": "Cancellation",
+      "procedure": "Stop during research → partial saved, UI recovers"
+    },
+    {
+      "id": "L22",
+      "category": "No keys",
+      "procedure": "Boot without keys → recall works, model paths say NOT_CONFIGURED (no requests)"
+    },
+    {
+      "id": "L23",
+      "category": "Provider fallback",
+      "procedure": "**Mock-only** (Tier 1). No deliberately invalid live requests (F05)."
+    },
+    {
+      "id": "L24",
+      "category": "Search unavailable",
+      "procedure": "`TAVILY_API_KEY` unset (no request sent) → code-written \"couldn't search\" line; checkable claims withheld"
+    }
+  ],
+  "minimum": {
+    "continuum": [
+      "L01",
+      "L03",
+      "L06",
+      "L07",
+      "L08",
+      "L09",
+      "L12",
+      "L14"
+    ],
+    "bothBaselineContexts": [
+      "L06",
+      "L07",
+      "L08",
+      "L12"
+    ]
+  }
+}

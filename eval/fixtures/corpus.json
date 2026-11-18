@@ -1,0 +1,202 @@
+[
+  {
+    "id": "C01",
+    "workspace": "lab",
+    "logicalAt": "2026-11-16T05:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+    "checkable": true,
+    "question": "Shortlist CRM tools for a 20-person sales team.",
+    "answer": "HubSpot $20, Pipedrive $19, Zoho CRM $14, Freshsales $9 and Close $29 per seat per month."
+  },
+  {
+    "id": "C02",
+    "workspace": "lab",
+    "logicalAt": "2026-11-10T09:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Postgres hosting: Neon, Supabase, Railway pricing",
+    "checkable": true,
+    "question": "Compare Postgres hosting pricing for Neon, Supabase and Railway.",
+    "answer": "Example prices: Neon $19/mo, Supabase $25/mo and Railway $5/mo."
+  },
+  {
+    "id": "C03",
+    "workspace": "lab",
+    "logicalAt": "2026-11-10T13:00:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Weekend trip packing tips",
+    "checkable": false,
+    "question": "What should I pack for a weekend trip?",
+    "answer": "Roll your clothes and bring a light layer."
+  },
+  {
+    "id": "C04",
+    "workspace": "lab",
+    "logicalAt": "2026-11-03T03:45:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Latest Node.js LTS version",
+    "checkable": true,
+    "question": "What is the latest Node.js LTS version?",
+    "answer": "The fixture uses Node.js version 24."
+  },
+  {
+    "id": "C05",
+    "workspace": "lab",
+    "logicalAt": "2026-11-03T14:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Postgres connection pooling explained",
+    "checkable": false,
+    "question": "Explain Postgres connection pooling.",
+    "answer": "A pool reuses connections."
+  },
+  {
+    "id": "C06",
+    "workspace": "lab",
+    "logicalAt": "2026-11-11T06:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "\"Managed database providers for side projects\" (Neon, PlanetScale)",
+    "checkable": true,
+    "question": "What managed database providers suit side projects?",
+    "answer": "Neon starts at $0 and PlanetScale at $39/mo in this example."
+  },
+  {
+    "id": "C07",
+    "workspace": "lab",
+    "logicalAt": "2026-11-13T10:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Python vs TypeScript for scripting (opinion)",
+    "checkable": false,
+    "question": "Python vs TypeScript for scripting?",
+    "answer": "I prefer Python for small scripts and TypeScript for shared web application types."
+  },
+  {
+    "id": "C08",
+    "workspace": "lab",
+    "logicalAt": "2026-11-09T04:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "CRM email-integration question (how-to)",
+    "checkable": false,
+    "question": "How does CRM email integration work?",
+    "answer": "Connect the mailbox and associate threads with contacts."
+  },
+  {
+    "id": "C09",
+    "workspace": "lab",
+    "logicalAt": "2026-10-15T08:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Vector database pricing (Pinecone, Weaviate)",
+    "checkable": true,
+    "question": "Compare Pinecone and Weaviate vector database pricing.",
+    "answer": "Example prices are $50 and $25 monthly, respectively."
+  },
+  {
+    "id": "C10",
+    "workspace": "lab",
+    "logicalAt": "2026-11-01T20:00:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "GPU cloud pricing",
+    "checkable": true,
+    "question": "What is GPU cloud pricing like?",
+    "answer": "The test price is $1.20 per hour."
+  },
+  {
+    "id": "C11",
+    "workspace": "lab",
+    "logicalAt": "2026-11-14T13:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Who is the current CEO of GitHub",
+    "checkable": true,
+    "question": "Who is the current CEO of GitHub?",
+    "answer": "This fixture attributes the GitHub CEO role to Thomas Dohmke."
+  },
+  {
+    "id": "C12",
+    "workspace": "lab",
+    "logicalAt": "2026-11-16T11:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Separate conversation: \"add Attio to the CRM list\", with its price",
+    "checkable": true,
+    "question": "Add Attio to the CRM list and include its price.",
+    "answer": "Attio Plus is $29 per seat per month in this fixture."
+  },
+  {
+    "id": "C13",
+    "workspace": "live",
+    "logicalAt": "2026-11-16T06:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Isolation check (CRM topic): must never appear in lab results",
+    "checkable": true,
+    "question": "Which CRM should I use in Live?",
+    "answer": "The fictional Live CRM plan costs $13/mo."
+  },
+  {
+    "id": "C14",
+    "workspace": "lab",
+    "logicalAt": "2026-10-26T04:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Large language model API pricing: Gemini Flash vs Claude Haiku per million tokens",
+    "checkable": true,
+    "question": "Compare large language model API pricing for Gemini Flash and Claude Haiku.",
+    "answer": "The sample prices are $0.30 and $1 per million input tokens."
+  },
+  {
+    "id": "C15",
+    "workspace": "lab",
+    "logicalAt": "2026-10-27T08:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Object storage: Amazon S3 vs Cloudflare R2 egress fees",
+    "checkable": true,
+    "question": "Compare Amazon S3 vs Cloudflare R2 object storage egress fees.",
+    "answer": "The sample fees are $0.09 and $0 per GB."
+  },
+  {
+    "id": "C16",
+    "workspace": "lab",
+    "logicalAt": "2026-10-28T03:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Email deliverability tools: Postmark vs SendGrid pricing",
+    "checkable": true,
+    "question": "Compare Postmark and SendGrid email deliverability tools and pricing.",
+    "answer": "This fixture uses $15 and $20 monthly."
+  },
+  {
+    "id": "C17",
+    "workspace": "lab",
+    "logicalAt": "2026-10-29T10:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Bun vs Deno vs Node startup time",
+    "checkable": true,
+    "question": "Compare Bun, Deno and Node startup time.",
+    "answer": "Sample measurements: 8 ms, 21 ms, 28 ms."
+  },
+  {
+    "id": "C18",
+    "workspace": "lab",
+    "logicalAt": "2026-10-30T05:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Apartment rent in Bengaluru: Indiranagar vs HSR Layout",
+    "checkable": true,
+    "question": "Compare apartment rent in Bengaluru, Indiranagar vs HSR Layout.",
+    "answer": "Sample rents are ₹40,000 and ₹32,000 monthly."
+  },
+  {
+    "id": "C19",
+    "workspace": "lab",
+    "logicalAt": "2026-10-31T07:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "Static site hosting: Netlify vs Vercel free tier limits",
+    "checkable": true,
+    "question": "Compare Netlify and Vercel free tier limits for a static site.",
+    "answer": "The sample assigns each 100 GB of monthly transfer."
+  },
+  {
+    "id": "C20",
+    "workspace": "lab",
+    "logicalAt": "2026-10-24T12:30:00.000Z",
+    "tz": "Asia/Kolkata",
+    "topic": "How to cook dal makhani (recipe)",
+    "checkable": false,
+    "question": "How do I cook dal makhani?",
+    "answer": "Soak lentils, simmer until tender and stir in butter and cream."
+  }
+]
