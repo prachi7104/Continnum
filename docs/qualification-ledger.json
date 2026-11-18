@@ -1,15 +1,192 @@
 {
   "gemini": {
     "cap": 24,
-    "used": 0
+    "used": 20
   },
   "tavily": {
     "cap": 5,
-    "used": 0
+    "used": 2
   },
   "groq": {
     "cap": 0,
     "used": 0
   },
-  "entries": []
+  "entries": [
+    {
+      "id": "10f0b626-8fe0-411d-811f-6e30c2c1680b",
+      "at": "2026-11-18T06:33:53.657Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "quick-stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "fc630a1d-2791-4321-97d4-f99ff297ca43",
+      "at": "2026-11-18T06:34:13.397Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "quick-stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "ff3f1c1b-d5d7-411b-8150-ec0540e6bf2a",
+      "at": "2026-11-18T06:34:33.530Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "quick-stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "7e2c57cf-5ecc-45ad-ae28-d491b560cca1",
+      "at": "2026-11-18T06:34:44.631Z",
+      "kind": "tavily",
+      "model": null,
+      "purpose": "quick-basic",
+      "outcome": "pass"
+    },
+    {
+      "id": "466b5fa2-6bfa-41da-b39c-f3a0801def16",
+      "at": "2026-11-18T06:35:07.168Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "87215808-b9f5-4066-9b38-8180fd51ece1",
+      "at": "2026-11-18T06:35:18.614Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "parallel-tools",
+      "outcome": "pass"
+    },
+    {
+      "id": "2a561f12-7ad8-4479-98e7-1e72fea11926",
+      "at": "2026-11-18T06:35:28.507Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "final-none",
+      "outcome": "pass"
+    },
+    {
+      "id": "7cd1b541-9322-41df-bb86-a08fca3d771b",
+      "at": "2026-11-18T06:35:35.239Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "final-omitted",
+      "outcome": "pass"
+    },
+    {
+      "id": "2388fa4d-fc31-4ca1-92c3-cc0e018ce5f0",
+      "at": "2026-11-18T06:35:43.625Z",
+      "kind": "gemini",
+      "model": "gemini-3.8-flash",
+      "purpose": "output-array",
+      "outcome": "timeout"
+    },
+    {
+      "id": "b6b0c718-97c0-4c2f-b7ad-b420efe0b64f",
+      "at": "2026-11-18T06:36:13.642Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "29576682-205f-499d-bbb8-ebf102ef5141",
+      "at": "2026-11-18T06:36:29.826Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "parallel-tools",
+      "outcome": "pass"
+    },
+    {
+      "id": "0f6488fc-176a-4281-86d9-361867aef3c2",
+      "at": "2026-11-18T06:36:49.092Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "final-none",
+      "outcome": "pass"
+    },
+    {
+      "id": "7031e3f3-483a-4449-93b8-b280b62f6b84",
+      "at": "2026-11-18T06:37:10.270Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "final-omitted",
+      "outcome": "timeout"
+    },
+    {
+      "id": "3f44fb1d-6447-4fe4-a58b-8e79c823c38c",
+      "at": "2026-11-18T06:37:40.306Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "output-array",
+      "outcome": "pass"
+    },
+    {
+      "id": "444c05ae-ad05-4551-9248-a6d5b9143c27",
+      "at": "2026-11-18T06:38:06.851Z",
+      "kind": "gemini",
+      "model": "gemini-3.6-flash",
+      "purpose": "cancellation",
+      "outcome": "pass"
+    },
+    {
+      "id": "d82db698-67c9-4371-93aa-4d8d8c20e624",
+      "at": "2026-11-18T06:38:34.332Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "stream",
+      "outcome": "pass"
+    },
+    {
+      "id": "cd6c8015-2d0e-460b-922e-555469d59fe4",
+      "at": "2026-11-18T06:38:40.400Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "parallel-tools",
+      "outcome": "pass"
+    },
+    {
+      "id": "6ecc75ff-236f-45a4-8369-5618787046fd",
+      "at": "2026-11-18T06:38:49.505Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "final-none",
+      "outcome": "pass"
+    },
+    {
+      "id": "b7985fad-37a2-4b24-932d-a53ab588b2e6",
+      "at": "2026-11-18T06:38:57.410Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "final-omitted",
+      "outcome": "pass"
+    },
+    {
+      "id": "fab00308-3acd-45f4-bedb-c23222795688",
+      "at": "2026-11-18T06:39:04.935Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "output-array",
+      "outcome": "pass"
+    },
+    {
+      "id": "e9f74451-6171-4a52-8752-61bab63e9c21",
+      "at": "2026-11-18T06:39:11.488Z",
+      "kind": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "purpose": "cancellation",
+      "outcome": "pass"
+    },
+    {
+      "id": "941548e3-6138-4cac-a964-9fa9aed0f0fc",
+      "at": "2026-11-18T06:39:17.491Z",
+      "kind": "tavily",
+      "model": null,
+      "purpose": "basic-result-shape",
+      "outcome": "pass"
+    }
+  ]
 }
