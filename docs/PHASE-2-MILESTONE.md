@@ -6,9 +6,9 @@
 |---|---|
 | Phase 0 qualification and Phase 1 functionality | **ACCEPTED** by the owner. Previously established live evidence remains in [PHASE-0-1-MILESTONE.md](PHASE-0-1-MILESTONE.md). |
 | Phase 1 Git closeout | **COMPLETE** at `f600734ea256603896b0f26bf1e3d769d150e7da`. |
-| Phase 2 offline milestone | **COMPONENT CHECKS PASS**. The targeted correction passed 43 Vitest tests and all non-browser checks. Native stock CI on this revision is pending. The preceding native stock CI passed 38 tests, both Chromium scenarios and teardown. |
-| Phase 2 Git commit | **PENDING**. Actual `main` HEAD is `f600734ea256603896b0f26bf1e3d769d150e7da`. Phase 2 files are modified or untracked. Managed `.git` is read-only and the earlier staging escalation was denied by automatic review. |
-| Phase 2 live research | **FAILED** on the original smoke, which used 2 of 2 Gemini requests and 1 of 1 Tavily Basic credits, with 0 Groq calls. The separately authorized retest has used zero requests and remains pending. |
+| Phase 2 offline milestone | **PASS** for the 43 verified component tests and the native Chromium result recorded before the corrected implementation commit. The full native stock terminal transcript was not retained in the workspace. |
+| Phase 2 Git commit | **COMPLETE** at `de559ca4ef0b27ea018e0fbc4cb37d4aa5cf8602`. The worktree was clean at retest dispatch and on inspection before Phase 3 work. |
+| Phase 2 live research | **FAILED**. The original run stopped at an evidence limitation. The retest reached the first-byte deadline before search. Successful grounded live research remains open. |
 | Hosted CI and Node 22 | **NOT RUN**. Local verification uses Node 24.11.0 and npm 11.6.1. |
 
 ## Baseline and integrity
@@ -163,21 +163,13 @@ Three labeled synthetic tests reproduced the old selector's shortcomings and pas
 
 TypeScript, ESLint, SQLite integrity, frozen corpus checks and **43 Vitest tests across seven files** passed after the correction. The Vitest run used one worker, masked credentials and a loopback-only Node fetch guard. It included real HTTP SSE and mocked smoke transport, reservation, duplicate-run refusal, 429 termination without retry, progress without a sourced answer, and citation persistence. The managed npm verification was interrupted by automatic review over an external Visual Studio telemetry connection. Run stock CI and teardown natively on the new revision using the earlier block. A scan of 78 committed blobs and 29 working-tree files found no matches for configured secrets, recognizable provider key formats or prohibited artifact paths. All five frozen fixture hashes matched.
 
-After native stock CI and teardown pass and the exact Phase 2 implementation commit exists, run the following command from native PowerShell. The CLI checks for a clean Phase 2 commit and reserves the new directory exclusively. The fixed prompt, single Basic query, single round, exact provider endpoints, two Gemini attempts, zero retries and zero fallback remain enforced. All normalized search hits and final synthesis text are local-only diagnostics in the ignored receipt.
+The native Playwright result file showed `passed` at 14:48:56 IST, before the corrected implementation commit at 14:49:22 IST. The separately authorized retest then ran against the clean commit.
 
-```powershell
-Set-Location -LiteralPath 'E:\projects\Continuum'
-node --no-warnings --env-file-if-exists=.env --import tsx --import ./scripts/sqlite-warnings.ts scripts/phase2-smoke.ts --run-once-02
-$retestExit = $LASTEXITCODE
-if (Test-Path -LiteralPath 'tmp/phase2-live-smoke-02/attempts.jsonl') {
-  Get-Content -LiteralPath 'tmp/phase2-live-smoke-02/attempts.jsonl'
-}
-if (Test-Path -LiteralPath 'tmp/phase2-live-smoke-02/result.json') {
-  $receipt = Get-Content -LiteralPath 'tmp/phase2-live-smoke-02/result.json' -Raw | ConvertFrom-Json
-  $receipt | Select-Object passed,failure,counts | ConvertTo-Json -Depth 4
-  $receipt.result.checks
-}
-if ($retestExit -ne 0) { Write-Warning 'Retest failed. Preserve the receipts.' }
-```
+| Attempt | Gemini | Tavily | Groq | Result |
+|---|---:|---:|---:|---|
+| Original | 2 | 1 | 0 | Three HTTP 200 responses. The application completed the turn with a limitation after withholding an unsupported statement. |
+| Retest | 1 | 0 | 0 | Exit code 1. `turn.started` then `turn.error` with `PROVIDER_UNAVAILABLE` and no partial answer. |
 
-The original reservation and all three original hashes are preserved. Phase 2 full acceptance still requires a supported live answer. Phase 3 offline development may begin when Phase 2 offline verification and its implementation commit pass. A fundamental retest regression in transport, persistence, security or orchestration must be resolved before Phase 3 integration.
+For the retest, the journal recorded the Gemini tool-selection dispatch at 09:19:36.029 UTC and a failure at 09:19:44.033 UTC, 8,004 ms later. There was no HTTP response record. SQLite persisted one `generation` attempt with `outcome=first_byte`, `http_status=NULL`, and `latency_ms=8017`. The turn ended after 8,031 ms without a provider chunk. Empty search and synthesis diagnostics match the recorded sequence. The isolated database integrity check returned `ok` and the persisted terminal state matched the reload. The available evidence establishes the application first-byte timeout. It does not distinguish slow upstream processing from a stalled network, and supplies no evidence of HTTP throttling, rejection, or an implementation-integrity regression.
+
+Both ignored receipt directories were inspected read-only. The retest SHA-256 values are `b9f077c73a888477361b9154734e2014a12e35162002a32b4821bac11803f157` for `result.json`, `5bbfa505fd3d06a3dc535fb576a7b05cac536137b977830b3d6787fa13771780` for `attempts.jsonl`, and `03a2eaed0926c8fdee72d3207e53b84963258c85efcc647109fcad766f0c260d` for `continuum.db`. Both allocations are closed. A successful grounded live answer remains outstanding, and the owner authorized independent offline Phase 3 work.
