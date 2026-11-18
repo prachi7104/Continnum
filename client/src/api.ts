@@ -1,6 +1,6 @@
 // Reads the local chat API and validates event framing across arbitrary network chunks.
 import { z } from 'zod';
-import { apiErrorSchema, conversationSchema, detailSchema, eventSchema, healthSchema, type TurnEvent } from '../../shared/events.ts';
+import { apiErrorSchema, conversationSchema, detailSchema, eventSchema, healthSchema, type Selection, type TurnEvent } from '../../shared/events.ts';
 
 export async function check(response: Response) {
   if (response.ok) return response;
@@ -27,10 +27,10 @@ export async function newConversation() {
   return z.object({ id: z.uuid() }).parse(await response.json()).id;
 }
 
-export async function streamTurn(id: string, text: string, signal: AbortSignal, onEvent: (event: TurnEvent) => void) {
+export async function streamTurn(id: string, text: string, signal: AbortSignal, onEvent: (event: TurnEvent) => void, selection?: Selection) {
   const response = await check(await fetch('/api/conversations/' + encodeURIComponent(id) + '/turns', {
     method: 'POST', signal, headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
-    body: JSON.stringify({ text, clientTurnId: crypto.randomUUID(), tz: Intl.DateTimeFormat().resolvedOptions().timeZone }),
+    body: JSON.stringify({ text, selection, clientTurnId: crypto.randomUUID(), tz: Intl.DateTimeFormat().resolvedOptions().timeZone }),
   }));
   if (!response.body || !response.headers.get('Content-Type')?.startsWith('text/event-stream')) throw new Error('Expected a response stream.');
   const reader = response.body.getReader();
@@ -54,7 +54,7 @@ export async function streamTurn(id: string, text: string, signal: AbortSignal, 
         const event = eventSchema.parse(JSON.parse(data));
         if (terminal || event.seq !== ++seq || (turnId && event.turnId !== turnId)) throw new Error('Invalid response sequence.');
         turnId = event.turnId;
-        terminal = event.type === 'turn.completed' || event.type === 'turn.error';
+        terminal = event.type === 'turn.completed' || event.type === 'turn.error' || event.type === 'clarify';
         onEvent(event);
       }
     }

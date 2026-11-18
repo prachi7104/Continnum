@@ -2,7 +2,7 @@
 import { z } from 'zod';
 
 export const workspaceSchema = z.enum(['live', 'lab']);
-export const routeSchema = z.enum(['chat_plain', 'research', 'undecided']);
+export const routeSchema = z.enum(['chat_plain', 'research', 'undecided', 'recall_synth']);
 export type Route = z.infer<typeof routeSchema>;
 export const errorCode = z.enum([
   'CANCELLED', 'DEADLINE', 'PROVIDER_UNAVAILABLE', 'SEARCH_UNAVAILABLE', 'CONFIG_ERROR',
@@ -14,6 +14,22 @@ export type ErrorCode = z.infer<typeof errorCode>;
 
 const id = z.uuid();
 const timing = z.number().nonnegative();
+export const originSchema = z.enum(['real', 'sample', 'fake']);
+const memoryEpisode = z.object({ messageId: id, conversationId: id, title: z.string(), logicalAt: z.iso.datetime(),
+  preview: z.string(), origin: originSchema, eligible: z.boolean(), refs: z.array(z.string()) });
+export const memorySchema = z.object({
+  state: z.enum(['NOT_REQUESTED', 'EMPTY_RANGE', 'NO_CONFIDENT_MATCH', 'AMBIGUOUS', 'FOUND_NO_BASELINE', 'FOUND_WITH_BASELINE', 'ERROR']),
+  intervals: z.array(z.object({ label: z.string(), startUtc: z.iso.datetime(), endUtc: z.iso.datetime() })),
+  usedAlternate: z.boolean(), episodes: z.array(memoryEpisode), truncated: z.boolean(), tz: z.string(),
+});
+export type MemoryView = z.infer<typeof memorySchema>;
+export const selectionSchema = z.object({ clarificationId: id, optionIndex: z.number().int().min(0).max(3) }).strict();
+export type Selection = z.infer<typeof selectionSchema>;
+export const clarificationSchema = z.object({
+  clarificationId: id, question: z.string(),
+  options: z.array(z.object({ index: z.number().int().min(0).max(3), label: z.string(), logicalAt: z.iso.datetime(), preview: z.string() })),
+});
+export type Clarification = z.infer<typeof clarificationSchema>;
 export const evidenceSchema = z.object({
   ref: z.string().regex(/^E[1-9]\d*$/), url: z.httpUrl(), title: z.string(), domain: z.string(),
   domainMatch: z.enum(['exact', 'none']), entity: z.string(), retrievedAt: z.iso.datetime(),
@@ -34,6 +50,7 @@ export const statsSchema = z.object({
   rounds: z.number().int().nonnegative().optional(),
   withheld: z.number().int().nonnegative().optional(),
   coverage: z.array(coverageSchema).optional(),
+  memory: memorySchema.optional(),
 });
 export type Stats = z.infer<typeof statsSchema>;
 
@@ -47,6 +64,9 @@ const envelope = { turnId: id, seq: z.number().int().positive() };
 export const eventSchema = z.discriminatedUnion('type', [
   z.object({ ...envelope, type: z.literal('turn.started'), userMessageId: id, assistantMessageId: id,
     workspace: workspaceSchema, logicalNow: z.iso.datetime(), realNow: z.iso.datetime(), tz: z.string(), route: routeSchema }),
+  z.object({ ...envelope, type: z.literal('memory'), ...memorySchema.shape }),
+  z.object({ ...envelope, type: z.literal('clarify'), ...clarificationSchema.shape }),
+  z.object({ ...envelope, type: z.literal('answer.direct'), text: z.string().min(1) }),
   z.object({ ...envelope, type: z.literal('answer.delta'), text: z.string().min(1) }),
   z.object({ ...envelope, type: z.literal('search.started'), queryId: id, query: z.string(), entity: z.string(), round: z.number().int().positive() }),
   z.object({ ...envelope, type: z.literal('search.finished'), queryId: id, resultCount: z.number().int().nonnegative(), ms: timing,
@@ -71,7 +91,6 @@ export const healthSchema = z.object({
   }),
   lab: z.object({ enabled: z.boolean() }), fakeMode: z.boolean(),
 });
-export const originSchema = z.enum(['real', 'sample', 'fake']);
 export const conversationSchema = z.object({ id, title: z.string(), origin: originSchema, updatedLogicalAt: z.iso.datetime() });
 export const messageSchema = z.object({
   id, role: z.enum(['user', 'assistant']), content: z.string(),
@@ -80,6 +99,7 @@ export const messageSchema = z.object({
   logicalAt: z.iso.datetime(), recordedAt: z.iso.datetime(), tz: z.string(), origin: originSchema,
   stats: statsSchema.nullable().optional(),
   evidence: z.array(evidenceSchema).optional(),
+  clarification: clarificationSchema.optional(),
 });
 export const detailSchema = z.object({ conversation: conversationSchema.extend({ workspace: workspaceSchema }), messages: z.array(messageSchema) });
 export const apiErrorSchema = z.object({ code: errorCode, message: z.string() });

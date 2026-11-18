@@ -1,7 +1,7 @@
 // Exposes local chat and conversation APIs with bounded JSON bodies and typed failures.
 import { Hono } from 'hono';
 import type { Context } from 'hono';
-import { workspaceSchema, turnRequest, type ErrorCode } from '../../../shared/events.ts';
+import { workspaceSchema, turnRequest, selectionSchema, type ErrorCode } from '../../../shared/events.ts';
 import { type LogicalClock, type Monotonic, type WallClock } from '../clock.ts';
 import type { Repo } from '../db/repo.ts';
 import { classify } from '../engine/route.ts';
@@ -110,7 +110,8 @@ export function createApp(options: AppOptions) {
     const request = turnRequest.safeParse(value);
     if (!request.success) return problem(c, 422, 'INVALID_REQUEST', 'Enter a message within 8,000 characters and supply the client turn ID and time zone.');
     const { text, tz, clientTurnId, selection } = request.data;
-    if (selection !== undefined) return problem(c, 422, 'INVALID_SELECTION', 'This conversation has no selectable clarification.');
+    const choice = selectionSchema.optional().safeParse(selection);
+    if (!choice.success) return problem(c, 422, 'INVALID_SELECTION', 'This conversation has no selectable clarification.');
     let formatter: Intl.DateTimeFormat;
     try {
       if (/^[+-]/.test(tz)) throw new Error('Use IANA zone');
@@ -124,13 +125,14 @@ export function createApp(options: AppOptions) {
     const realNow = wall.nowIso();
     const logicalNow = logical.now(conversation.workspace, realNow);
     const route = classify(text, Number(formatter.format(logicalNow)));
-    const admitted = repo.admit({ conversationId: id, clientTurnId, text, tz, route, logicalNow, realNow });
+    const admitted = repo.admit({ conversationId: id, clientTurnId, text, tz, route, logicalNow, realNow, selection: choice.data });
     if (admitted.kind === 'duplicate') return problem(c, 409, 'DUPLICATE_TURN', 'That turn was already submitted.', admitted.existing);
     if (admitted.kind === 'busy') return problem(c, 409, 'TURN_IN_PROGRESS', 'A turn is in progress.', { turnId: admitted.turnId });
     if (admitted.kind === 'missing') return problem(c, 404, 'NOT_FOUND', 'Conversation not found.');
+    if (admitted.kind !== 'admitted') return problem(c, 422, 'INVALID_SELECTION', 'That clarification option is no longer available here.');
     return turnStream(c, admitted.turn.id, (clientSignal, send) => runTurn(
       { ...options, unqualified: hasGeminiKey },
-      { turn: admitted.turn, text, tz, route, logicalNow, realNow, clientSignal, send },
+      { turn: admitted.turn, text: admitted.text, tz, route, logicalNow, realNow, clientSignal, send },
     ));
   });
   return app;

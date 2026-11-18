@@ -5,8 +5,10 @@ import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { localDate, type LabAnchor, type LabStore, type WallClock, type Workspace } from '../clock.ts';
 import { migrate } from './migrate.ts';
-import type { EvidenceSource } from '../../../shared/events.ts';
+import { clarificationSchema, type Clarification, type EvidenceSource, type Selection } from '../../../shared/events.ts';
 import type { StoredSource } from '../evidence/sources.ts';
+import { eligibleEpisodes, retrieve, type Episode, type MemoryInput } from '../memory/retrieve.ts';
+import { clarificationQuestion } from '../memory/render.ts';
 
 type Origin = 'real' | 'fake' | 'sample';
 type Conversation = { id: string; title: string; workspace: Workspace; origin: Origin; updatedLogicalAt: string };
@@ -15,14 +17,15 @@ type MessageRow = {
   origin: Origin; logicalAt: string; recordedAt: string; tz: string; localDate: string;
   route: string | null; replyTo: string | null; stats_json: string | null;
 };
-export type Turn = { id: string; conversationId: string; workspace: Workspace; userMessageId: string; assistantMessageId: string };
-type TurnInput = { conversationId: string; clientTurnId: string; text: string; tz: string; route: string; logicalNow: Date; realNow: string };
+export type Turn = { id: string; conversationId: string; workspace: Workspace; userMessageId: string; assistantMessageId: string; pinnedEpisodeId?: string };
+type TurnInput = { conversationId: string; clientTurnId: string; text: string; tz: string; route: string; logicalNow: Date; realNow: string; selection?: Selection };
+type Option = Clarification['options'][number] & { episodeMessageId: string };
 type ExistingTurn = { turnId: string; status: 'active' | 'done'; assistantMessageId: string };
 export type Admission =
-  | { kind: 'admitted'; turn: Turn }
+  | { kind: 'admitted'; turn: Turn; text: string }
   | { kind: 'duplicate'; existing: ExistingTurn }
   | { kind: 'busy'; turnId: string }
-  | { kind: 'missing' };
+  | { kind: 'missing' | 'invalid' };
 
 export class Repo implements LabStore {
   private readonly db: DatabaseSync;
@@ -110,8 +113,16 @@ export class Repo implements LabStore {
       });
       byMessage.set(messageId, items);
     }
+    const choices = new Map<string, Clarification>();
+    for (const choice of this.db.prepare(`SELECT c.id, c.options_json, t.assistant_message_id FROM clarifications c
+      JOIN turns t ON t.id=c.turn_id WHERE c.conversation_id=? AND c.consumed=0 AND t.terminal_code='COMPLETED'`).all(id)) {
+      choices.set(String(choice.assistant_message_id), clarificationSchema.parse({
+        clarificationId: String(choice.id), question: clarificationQuestion, options: JSON.parse(String(choice.options_json)),
+      }));
+    }
     const messages = rows.map(({ stats_json, ...row }) => ({
       ...row, evidence: byMessage.get(row.id) ?? [], stats: stats_json === null ? null : JSON.parse(stats_json) as unknown,
+      clarification: choices.get(row.id),
     }));
     return { conversation, messages };
   }
@@ -137,26 +148,43 @@ export class Repo implements LabStore {
       if (existing) return { kind: 'duplicate', existing };
       const active = this.activeTurn(conversation.id);
       if (active) return { kind: 'busy', turnId: active };
-      const turn = {
+      const turn: Turn = {
         id: randomUUID(), conversationId: conversation.id, workspace: conversation.workspace,
         userMessageId: randomUUID(), assistantMessageId: randomUUID(),
       };
+      let text = input.text;
+      let displayedText = input.text;
+      if (input.selection) {
+        const row = this.db.prepare(`SELECT c.original_text, c.options_json FROM clarifications c JOIN turns t ON t.id=c.turn_id
+          WHERE c.id=? AND c.conversation_id=? AND c.workspace=? AND c.consumed=0 AND t.terminal_code='COMPLETED'`)
+          .get(input.selection.clarificationId, conversation.id, conversation.workspace);
+        if (!row) return { kind: 'invalid' };
+        const option = (JSON.parse(String(row.options_json)) as Option[])[input.selection.optionIndex];
+        if (!option || !eligibleEpisodes(this.db, { text, workspace: turn.workspace, conversationId: turn.conversationId,
+          turnId: turn.id, now: input.logicalNow, tz: input.tz, fakeMode: this.origin === 'fake' }, [], option.episodeMessageId).length) {
+          return { kind: 'invalid' };
+        }
+        turn.pinnedEpisodeId = option.episodeMessageId;
+        text = String(row.original_text);
+        displayedText = 'Selected: ' + option.label;
+        this.db.prepare('UPDATE clarifications SET consumed=1 WHERE id=?').run(input.selection.clarificationId);
+      }
       const logicalAt = input.logicalNow.toISOString();
       const epoch = turn.workspace === 'lab' ? this.labAnchor().epoch : null;
       this.db.prepare(`INSERT INTO turns (id, conversation_id, workspace, client_turn_id,
-        user_message_id, assistant_message_id, status, lab_epoch, started_real)
-        VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?)`)
-        .run(turn.id, turn.conversationId, turn.workspace, input.clientTurnId, turn.userMessageId, turn.assistantMessageId, epoch, input.realNow);
+        user_message_id, assistant_message_id, status, lab_epoch, started_real, pinned_episode_id)
+        VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?)`)
+        .run(turn.id, turn.conversationId, turn.workspace, input.clientTurnId, turn.userMessageId, turn.assistantMessageId, epoch, input.realNow, turn.pinnedEpisodeId ?? null);
       const insert = this.db.prepare(`INSERT INTO messages (id, conversation_id, workspace, turn_id, role, content,
         status, origin, logical_at, recorded_at, tz, local_date, route, reply_to)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
       const time = [this.origin, logicalAt, input.realNow, input.tz, localDate(input.logicalNow, input.tz), input.route];
-      insert.run(turn.userMessageId, turn.conversationId, turn.workspace, turn.id, 'user', input.text, 'complete', ...time, null);
+      insert.run(turn.userMessageId, turn.conversationId, turn.workspace, turn.id, 'user', displayedText, 'complete', ...time, null);
       insert.run(turn.assistantMessageId, turn.conversationId, turn.workspace, turn.id, 'assistant', '', 'streaming', ...time, turn.userMessageId);
       this.db.prepare(`UPDATE conversations SET title=CASE WHEN title='New conversation' THEN ? ELSE title END,
         updated_logical_at=? WHERE id=?`)
         .run(Array.from(input.text.replace(/\s+/g, ' ')).slice(0, 65).join(''), logicalAt, turn.conversationId);
-      return { kind: 'admitted', turn };
+      return { kind: 'admitted', turn, text };
     });
   }
 
@@ -165,6 +193,19 @@ export class Repo implements LabStore {
       AND (role='user' OR status='complete')
       AND turn_id IN (SELECT id FROM turns WHERE conversation_id=? AND id<>? ORDER BY rowid DESC LIMIT 8)
       ORDER BY rowid`).all(turn.conversationId, turn.conversationId, turn.id) as { role: 'user' | 'assistant'; content: string }[];
+  }
+
+  memory(input: Omit<MemoryInput, 'fakeMode'>) {
+    return retrieve(this.db, { ...input, fakeMode: this.origin === 'fake' });
+  }
+
+  clarify(turn: Turn, question: string, episodes: Episode[]): Clarification {
+    const clarificationId = randomUUID();
+    const options = episodes.map((ep, index) => ({ index, label: ep.title, logicalAt: ep.logicalAt, preview: ep.question.slice(0, 240) }));
+    const stored = options.map((option) => ({ ...option, episodeMessageId: episodes[option.index].messageId }));
+    this.db.prepare(`INSERT INTO clarifications (id,turn_id,conversation_id,workspace,original_text,options_json) VALUES (?,?,?,?,?,?)`)
+      .run(clarificationId, turn.id, turn.conversationId, turn.workspace, question, JSON.stringify(stored));
+    return { clarificationId, question: clarificationQuestion, options };
   }
 
   append(turn: Turn, text: string) {

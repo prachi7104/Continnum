@@ -2,12 +2,13 @@
 import { sentenceSegmenter, type StoredSource } from './sources.ts';
 
 const reference = /\b(?:E\d+(?:\.\d+)?|H[\da-f-]+\.\d+)\b/gi;
-const checkable = /[\p{N}\p{Sc}%]|\b(?:ceo|president|price|pricing|costs?|limits?|versions?|released?|today|yesterday|latest|january|february|march|april|june|july|august|september|october|november|december)\b/iu;
+export const checkable = /[\p{N}\p{Sc}%]|\b(?:ceo|president|price|pricing|costs?|limits?|versions?|released?|today|yesterday|latest|january|february|march|april|june|july|august|september|october|november|december)\b/iu;
 const canonical = (value: string) => value.normalize('NFKC').toLowerCase()
   .replace(/(?<=\d),(?=\d{3}(?:\D|$))/g, '').replace(/\s*(?:percent|%)/g, '%').replace(/(\p{Sc})\s+/gu, '$1');
 const values = (value: string): string[] => canonical(value).match(/[+-]?(?:\p{Sc})?\d+(?:\.\d+)*%?/gu) ?? [];
 const terms = (value: string): string[] => (canonical(value).match(/\p{L}{3,}/gu) ?? [])
   .filter((word) => !['the', 'and', 'was', 'are', 'that', 'this', 'with', 'from', 'has', 'had', 'for'].includes(word));
+const normalizeQuotation = (value: string) => value.normalize('NFKC').replace(/\s+/g, ' ').trim().replace(/[.!?]+$/, '');
 
 function chunks(text: string): string[] {
   const attached = text.replace(/([.!?])\s*((?:\[[EH][^\]\n]+\]\s*)+)/g, (_whole, mark: string, refs: string) => ' ' + refs.trim() + mark + ' ');
@@ -15,10 +16,11 @@ function chunks(text: string): string[] {
 }
 
 export type Released = { text: string; refs: string[]; support: 'sourced' | 'no_source' };
+export type HistoricalSource = { ref: string; entity: string; sentences: string[]; messageId: string };
 export const unavailableText = "I couldn't search the web, so I can't confirm current facts.";
 
-export function releaseAnswer(draft: string, sources: readonly StoredSource[]) {
-  const index = new Map(sources.flatMap((source) => source.sentences.map((sentence, i) => [
+export function releaseAnswer(draft: string, sources: readonly StoredSource[], history?: readonly HistoricalSource[]) {
+  const index = new Map((history ?? sources).flatMap((source) => source.sentences.map((sentence, i) => [
     source.ref + '.' + (i + 1), { sentence, entity: source.entity },
   ] as const)));
   const sentences: Released[] = [];
@@ -30,6 +32,15 @@ export function releaseAnswer(draft: string, sources: readonly StoredSource[]) {
       .replace(/https?:\/\/[^\s<>]+/gi, '').replace(/\s+([.,!?])/g, '$1').trim();
     if (!/[\p{L}\p{N}]/u.test(text)) continue;
     const cited = refs.map((ref) => index.get(ref)!);
+    if (history) {
+      // Historical synthesis can select and order actual sentences. Exact matches
+      // prevent a model from swapping entities or values within a cited sentence.
+      const matching = refs.filter((ref) => normalizeQuotation(index.get(ref)!.sentence) === normalizeQuotation(text));
+      if (!matching.length) { withheld++; continue; }
+      matching.forEach((ref) => supported.add(index.get(ref)!.entity));
+      sentences.push({ text, refs: matching, support: 'sourced' });
+      continue;
+    }
     const needed = values(text);
     const words = terms(text);
     const relevant = cited.filter(({ sentence }) => {

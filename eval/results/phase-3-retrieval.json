@@ -1,0 +1,2343 @@
+{
+  "corpusEpisodes": 20,
+  "retrieval": {
+    "stateMatches": 46,
+    "count": 48,
+    "requiredEpisodes": 60,
+    "matchedEpisodes": 55,
+    "unexpectedEpisodes": 0,
+    "episodePrecision": 1,
+    "episodeRecall": 0.9166666666666666,
+    "paraphrasesFound": 10,
+    "paraphrases": 12,
+    "falseMemories": 0,
+    "absentCases": 10,
+    "isolated": true,
+    "ambiguityPassed": true,
+    "medianMs": 1.431,
+    "maxMs": 6.675,
+    "failures": [
+      "Q16",
+      "Q31",
+      "P05",
+      "P07"
+    ],
+    "cases": [
+      {
+        "id": "Q01",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04",
+          "C05"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C05",
+          "C04"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.717,
+        "pass": true
+      },
+      {
+        "id": "Q02",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C02",
+          "C03"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C03",
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.959,
+        "pass": true
+      },
+      {
+        "id": "Q03",
+        "state": "EMPTY_RANGE",
+        "statePass": true,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [
+          "2026-11-03",
+          "2026-11-02",
+          "2026-11-09"
+        ],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.537,
+        "pass": true
+      },
+      {
+        "id": "Q04",
+        "state": "EMPTY_RANGE",
+        "statePass": true,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [
+          "2026-11-11",
+          "2026-11-13",
+          "2026-11-10"
+        ],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.273,
+        "pass": true
+      },
+      {
+        "id": "Q05",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C01",
+          "C12"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.77,
+        "pass": true
+      },
+      {
+        "id": "Q06",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C02"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.206,
+        "pass": true
+      },
+      {
+        "id": "Q07",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Weekend trip packing tips",
+          "Postgres hosting: Neon, Supabase, Railway pricing"
+        ],
+        "truncated": false,
+        "latencyMs": 0.849,
+        "pass": true
+      },
+      {
+        "id": "Q08",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.606,
+        "pass": true
+      },
+      {
+        "id": "Q09",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04",
+          "C05"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C05",
+          "C04"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.642,
+        "pass": true
+      },
+      {
+        "id": "Q10",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C02"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.094,
+        "pass": true
+      },
+      {
+        "id": "Q11",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C09"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C09"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.877,
+        "pass": true
+      },
+      {
+        "id": "Q12",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C04"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C04"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.172,
+        "pass": true
+      },
+      {
+        "id": "Q13",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C06"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C06"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.507,
+        "pass": true
+      },
+      {
+        "id": "Q14",
+        "state": "AMBIGUOUS",
+        "statePass": true,
+        "expectedState": "AMBIGUOUS",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [
+          "C05",
+          "C02"
+        ],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.019,
+        "pass": true
+      },
+      {
+        "id": "Q15",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.422,
+        "pass": true
+      },
+      {
+        "id": "Q16",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C09",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20"
+        ],
+        "matched": 6,
+        "episodes": [
+          "C19",
+          "C18",
+          "C17",
+          "C16",
+          "C15",
+          "C14"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.163,
+        "pass": false
+      },
+      {
+        "id": "Q17",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C12",
+          "C01"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.031,
+        "pass": true
+      },
+      {
+        "id": "Q18",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C10"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.048,
+        "pass": true
+      },
+      {
+        "id": "Q19",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C04"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.981,
+        "pass": true
+      },
+      {
+        "id": "Q20",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C10"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.985,
+        "pass": true
+      },
+      {
+        "id": "Q21",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C11"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C11"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.796,
+        "pass": true
+      },
+      {
+        "id": "Q22",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C08"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C08"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.48,
+        "pass": true
+      },
+      {
+        "id": "Q23",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C08",
+          "C12"
+        ],
+        "matched": 3,
+        "episodes": [
+          "C08",
+          "C01",
+          "C12"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.971,
+        "pass": true
+      },
+      {
+        "id": "Q24",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_NO_BASELINE",
+        "required": [
+          "C03"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.44,
+        "pass": true
+      },
+      {
+        "id": "Q25",
+        "state": "EMPTY_RANGE",
+        "statePass": true,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [
+          "2026-10-15",
+          "2026-10-24",
+          "2026-10-26"
+        ],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.877,
+        "pass": true
+      },
+      {
+        "id": "Q26",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C07",
+          "C11",
+          "C01",
+          "C12"
+        ],
+        "matched": 4,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.707,
+        "pass": true
+      },
+      {
+        "id": "Q27",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.832,
+        "pass": true
+      },
+      {
+        "id": "Q28",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C10"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.654,
+        "pass": true
+      },
+      {
+        "id": "Q29",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND* (bounded scan)",
+        "required": [
+          "C12",
+          "C01",
+          "C11",
+          "C06",
+          "C02"
+        ],
+        "matched": 5,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C06",
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.462,
+        "pass": true
+      },
+      {
+        "id": "Q30",
+        "state": "NOT_REQUESTED",
+        "statePass": true,
+        "expectedState": "NOT_REQUESTED",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.251,
+        "pass": true
+      },
+      {
+        "id": "Q31",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.082,
+        "pass": false
+      },
+      {
+        "id": "Q32",
+        "state": "EMPTY_RANGE",
+        "statePass": true,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [
+          "2026-11-16",
+          "2026-11-14",
+          "2026-11-13"
+        ],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.659,
+        "pass": true
+      },
+      {
+        "id": "Q33",
+        "state": "EMPTY_RANGE",
+        "statePass": true,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [
+          "2026-11-16",
+          "2026-11-14",
+          "2026-11-13"
+        ],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.399,
+        "pass": true
+      },
+      {
+        "id": "P01",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C14"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C14"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 6.675,
+        "pass": true
+      },
+      {
+        "id": "P02",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C14"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C14"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.506,
+        "pass": true
+      },
+      {
+        "id": "P03",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C15"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C15"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.765,
+        "pass": true
+      },
+      {
+        "id": "P04",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C15"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C15"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.976,
+        "pass": true
+      },
+      {
+        "id": "P05",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": false,
+        "expectedState": "FOUND*",
+        "required": [
+          "C16"
+        ],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.563,
+        "pass": false
+      },
+      {
+        "id": "P06",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C16"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C16"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.919,
+        "pass": true
+      },
+      {
+        "id": "P07",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": false,
+        "expectedState": "FOUND*",
+        "required": [
+          "C17"
+        ],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 2.185,
+        "pass": false
+      },
+      {
+        "id": "P08",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C17"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C17"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.608,
+        "pass": true
+      },
+      {
+        "id": "P09",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C18"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C18"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.651,
+        "pass": true
+      },
+      {
+        "id": "P10",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C19"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C19"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.603,
+        "pass": true
+      },
+      {
+        "id": "P11",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.072,
+        "pass": true
+      },
+      {
+        "id": "P12",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 0.88,
+        "pass": true
+      },
+      {
+        "id": "P13",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Static site hosting: Netlify vs Vercel free tier limits",
+          "Apartment rent in Bengaluru: Indiranagar vs HSR Layout",
+          "Bun vs Deno vs Node startup time",
+          "Email deliverability tools: Postmark vs SendGrid pricing"
+        ],
+        "truncated": false,
+        "latencyMs": 0.941,
+        "pass": true
+      },
+      {
+        "id": "P14",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C19"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C19"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.26,
+        "pass": true
+      },
+      {
+        "id": "P15",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C18"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C18"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.879,
+        "pass": true
+      }
+    ]
+  },
+  "noDateFilter": {
+    "stateMatches": 40,
+    "count": 48,
+    "requiredEpisodes": 60,
+    "matchedEpisodes": 38,
+    "unexpectedEpisodes": 87,
+    "episodePrecision": 0.304,
+    "episodeRecall": 0.6333333333333333,
+    "paraphrasesFound": 10,
+    "paraphrases": 12,
+    "falseMemories": 6,
+    "absentCases": 10,
+    "isolated": true,
+    "ambiguityPassed": true,
+    "medianMs": 1.1760000000000002,
+    "maxMs": 10.174,
+    "failures": [
+      "Q01",
+      "Q02",
+      "Q03",
+      "Q04",
+      "Q05",
+      "Q08",
+      "Q09",
+      "Q10",
+      "Q16",
+      "Q18",
+      "Q19",
+      "Q20",
+      "Q23",
+      "Q25",
+      "Q26",
+      "Q27",
+      "Q31",
+      "Q32",
+      "Q33",
+      "P05",
+      "P07",
+      "P13"
+    ],
+    "cases": [
+      {
+        "id": "Q01",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04",
+          "C05"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.678,
+        "pass": false
+      },
+      {
+        "id": "Q02",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C02",
+          "C03"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.606,
+        "pass": false
+      },
+      {
+        "id": "Q03",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": false,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.582,
+        "pass": false
+      },
+      {
+        "id": "Q04",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": false,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.479,
+        "pass": false
+      },
+      {
+        "id": "Q05",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.667,
+        "pass": false
+      },
+      {
+        "id": "Q06",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C02"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.731,
+        "pass": true
+      },
+      {
+        "id": "Q07",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.128,
+        "pass": true
+      },
+      {
+        "id": "Q08",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.687,
+        "pass": false
+      },
+      {
+        "id": "Q09",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04",
+          "C05"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.378,
+        "pass": false
+      },
+      {
+        "id": "Q10",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C02"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C05"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C05"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.497,
+        "pass": false
+      },
+      {
+        "id": "Q11",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C09"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C09"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.985,
+        "pass": true
+      },
+      {
+        "id": "Q12",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C04"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C04"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.144,
+        "pass": true
+      },
+      {
+        "id": "Q13",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C06"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C06"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.749,
+        "pass": true
+      },
+      {
+        "id": "Q14",
+        "state": "AMBIGUOUS",
+        "statePass": true,
+        "expectedState": "AMBIGUOUS",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [
+          "C05",
+          "C02"
+        ],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.916,
+        "pass": true
+      },
+      {
+        "id": "Q15",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 0.834,
+        "pass": true
+      },
+      {
+        "id": "Q16",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C09",
+          "C14",
+          "C15",
+          "C16",
+          "C17",
+          "C18",
+          "C19",
+          "C20"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.854,
+        "pass": false
+      },
+      {
+        "id": "Q17",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C12",
+          "C01"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.763,
+        "pass": true
+      },
+      {
+        "id": "Q18",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.617,
+        "pass": false
+      },
+      {
+        "id": "Q19",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C04"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.683,
+        "pass": false
+      },
+      {
+        "id": "Q20",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.972,
+        "pass": false
+      },
+      {
+        "id": "Q21",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C11"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C11"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.404,
+        "pass": true
+      },
+      {
+        "id": "Q22",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C08"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C08"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.18,
+        "pass": true
+      },
+      {
+        "id": "Q23",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C08",
+          "C12"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C08"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.256,
+        "pass": false
+      },
+      {
+        "id": "Q24",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_NO_BASELINE",
+        "required": [
+          "C03"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.234,
+        "pass": true
+      },
+      {
+        "id": "Q25",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": false,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.635,
+        "pass": false
+      },
+      {
+        "id": "Q26",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C07",
+          "C11",
+          "C01",
+          "C12"
+        ],
+        "matched": 4,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.727,
+        "pass": false
+      },
+      {
+        "id": "Q27",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 0.65,
+        "pass": false
+      },
+      {
+        "id": "Q28",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C10"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C10"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.09,
+        "pass": true
+      },
+      {
+        "id": "Q29",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND* (bounded scan)",
+        "required": [
+          "C12",
+          "C01",
+          "C11",
+          "C06",
+          "C02"
+        ],
+        "matched": 5,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C06",
+          "C02"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.428,
+        "pass": true
+      },
+      {
+        "id": "Q30",
+        "state": "NOT_REQUESTED",
+        "statePass": true,
+        "expectedState": "NOT_REQUESTED",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.143,
+        "pass": true
+      },
+      {
+        "id": "Q31",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C01",
+          "C12"
+        ],
+        "matched": 2,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.193,
+        "pass": false
+      },
+      {
+        "id": "Q32",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": false,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.266,
+        "pass": false
+      },
+      {
+        "id": "Q33",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": false,
+        "expectedState": "EMPTY_RANGE",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C12",
+          "C01",
+          "C11",
+          "C07",
+          "C06",
+          "C03"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": true,
+        "latencyMs": 1.179,
+        "pass": false
+      },
+      {
+        "id": "P01",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C14"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C14"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 5.558,
+        "pass": true
+      },
+      {
+        "id": "P02",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C14"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C14"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.527,
+        "pass": true
+      },
+      {
+        "id": "P03",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C15"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C15"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.549,
+        "pass": true
+      },
+      {
+        "id": "P04",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C15"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C15"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 2.173,
+        "pass": true
+      },
+      {
+        "id": "P05",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": false,
+        "expectedState": "FOUND*",
+        "required": [
+          "C16"
+        ],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.415,
+        "pass": false
+      },
+      {
+        "id": "P06",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C16"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C16"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.173,
+        "pass": true
+      },
+      {
+        "id": "P07",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": false,
+        "expectedState": "FOUND*",
+        "required": [
+          "C17"
+        ],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 2.408,
+        "pass": false
+      },
+      {
+        "id": "P08",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C17"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C17"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.643,
+        "pass": true
+      },
+      {
+        "id": "P09",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C18"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C18"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 10.174,
+        "pass": true
+      },
+      {
+        "id": "P10",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND_WITH_BASELINE",
+        "required": [
+          "C19"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C19"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 3.864,
+        "pass": true
+      },
+      {
+        "id": "P11",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 1.013,
+        "pass": true
+      },
+      {
+        "id": "P12",
+        "state": "NO_CONFIDENT_MATCH",
+        "statePass": true,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [
+          "Separate conversation: \"add Attio to the CRM list\", with its price",
+          "CRM shortlist for a 20-person sales team: HubSpot, Pipedrive, Zoho CRM, Freshsales, Close, with prices",
+          "Who is the current CEO of GitHub",
+          "Python vs TypeScript for scripting (opinion)"
+        ],
+        "truncated": false,
+        "latencyMs": 0.959,
+        "pass": true
+      },
+      {
+        "id": "P13",
+        "state": "FOUND_NO_BASELINE",
+        "statePass": false,
+        "expectedState": "NO_CONFIDENT_MATCH",
+        "required": [],
+        "matched": 0,
+        "episodes": [
+          "C05"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [
+          "C05"
+        ],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.358,
+        "pass": false
+      },
+      {
+        "id": "P14",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C19"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C19"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 1.169,
+        "pass": true
+      },
+      {
+        "id": "P15",
+        "state": "FOUND_WITH_BASELINE",
+        "statePass": true,
+        "expectedState": "FOUND*",
+        "required": [
+          "C18"
+        ],
+        "matched": 1,
+        "episodes": [
+          "C18"
+        ],
+        "options": [],
+        "optionsPass": true,
+        "extras": [],
+        "nearest": [],
+        "topics": [],
+        "truncated": false,
+        "latencyMs": 0.931,
+        "pass": true
+      }
+    ]
+  }
+}

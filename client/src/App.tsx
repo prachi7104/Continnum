@@ -2,12 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
 import Markdown from 'react-markdown';
-import type { ChatMessage, EvidenceSource } from '../../shared/events.ts';
+import type { ChatMessage, EvidenceSource, MemoryView, Selection } from '../../shared/events.ts';
 import { getConversation, getConversations, getHealth, newConversation, streamTurn } from './api.ts';
 
 type Conversation = Awaited<ReturnType<typeof getConversations>>[number];
 type Health = Awaited<ReturnType<typeof getHealth>>;
-type Transient = { question: string; answer: string; sources: EvidenceSource[]; searches: Record<string, { query: string; result?: string }> };
+type Transient = { question: string; answer: string; sources: EvidenceSource[]; memory?: MemoryView; searches: Record<string, { query: string; result?: string }> };
 const dateFormat = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' });
 const dayFormat = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' });
 const errorMessage = (error: unknown) => error instanceof Error ? error.message : 'Continuum could not complete the request.';
@@ -48,6 +48,21 @@ function Sources({ sources }: { sources: EvidenceSource[] }) {
       {source.sentences.map((sentence, index) => <p key={index}><strong>{source.ref}.{index + 1}</strong> {sentence}</p>)}
       <a href={source.url} target="_blank" rel="noopener noreferrer">Open source</a>
     </details>)}
+  </section>;
+}
+
+function MemoryReferences({ memory, open, busy }: { memory?: MemoryView; open: (id: string) => void; busy: boolean }) {
+  if (!memory?.episodes.length) return null;
+  const times = new Intl.DateTimeFormat(undefined, { timeZone: memory.tz, dateStyle: 'medium', timeStyle: 'short' });
+  return <section className="sources" aria-label="Past conversations">
+    <h3>Past conversations</h3>
+    {memory.episodes.map((episode) => <div key={episode.messageId}>
+      <button type="button" disabled={busy} onClick={() => open(episode.conversationId)}>Open {episode.title}</button>
+      <p><time dateTime={episode.logicalAt}>{times.format(new Date(episode.logicalAt))}</time> · {memory.tz}
+        {episode.origin !== 'real' && ' · ' + episode.origin}</p>
+      <p>{episode.preview}</p>
+      {!!episode.refs.length && <p>{episode.refs.join(', ')}</p>}
+    </div>)}
   </section>;
 }
 
@@ -114,9 +129,10 @@ export function App() {
     }
   }
 
-  async function submit(event?: FormEvent) {
+  async function submit(event?: FormEvent, selectedOption?: Selection & { label: string }) {
     event?.preventDefault();
-    const question = text.trim();
+    const selection = selectedOption && { clarificationId: selectedOption.clarificationId, optionIndex: selectedOption.optionIndex };
+    const question = selectedOption ? 'Selected: ' + selectedOption.label : text.trim();
     if (busy || controller.current || !question) return;
     const abort = new AbortController();
     controller.current = abort;
@@ -138,6 +154,13 @@ export function App() {
         if (event.type === 'answer.delta') {
           setStatus('Receiving response');
           setTransient((turn) => turn ? { ...turn, answer: turn.answer + event.text } : turn);
+        } else if (event.type === 'memory') {
+          setTransient((turn) => turn ? { ...turn, memory: event } : turn);
+        } else if (event.type === 'answer.direct') {
+          append(event.text);
+        } else if (event.type === 'clarify') {
+          append(event.question);
+          setStatus('Choose a past conversation');
         } else if (event.type === 'search.started') {
           setStatus('Searching the web');
           setTransient((turn) => turn ? { ...turn, searches: { ...turn.searches, [event.queryId]: { query: event.query } } } : turn);
@@ -159,7 +182,7 @@ export function App() {
           setError(event.code + ' · ' + event.message);
           setStatus('Turn ended');
         } else if (event.type === 'turn.completed') setStatus('Response saved');
-      });
+      }, selection);
     } catch (failure) {
       if (abort.signal.aborted) setStatus('Response stopped');
       else setError(errorMessage(failure));
@@ -223,6 +246,14 @@ export function App() {
                 <header><strong>{message.role === 'user' ? 'You' : 'Continuum'}</strong><time dateTime={message.logicalAt}>{dateFormat.format(new Date(message.logicalAt))}</time>{message.origin !== 'real' && <span className="badge">{message.origin === 'fake' ? 'Fake' : 'Sample'}</span>}</header>
                 {message.content && (message.role === 'assistant' ? <AssistantText content={message.content} /> : <p>{message.content}</p>)}
                 <Sources sources={message.evidence ?? []} />
+                {message.clarification ? <div className="sources" role="group" aria-label="Clarification choices">
+                  {message.clarification.options.map((option) => <div key={option.index}>
+                    <button type="button" disabled={busy} onClick={() => void submit(undefined, { label: option.label, optionIndex: option.index,
+                      clarificationId: message.clarification!.clarificationId })}>{option.label}</button>
+                    <p><time dateTime={option.logicalAt}>{dateFormat.format(new Date(option.logicalAt))}</time> · {option.preview}</p>
+                  </div>)}
+                </div> : message.stats?.memory?.state !== 'AMBIGUOUS' &&
+                  <MemoryReferences memory={message.stats?.memory} open={(id) => void open(id)} busy={busy} />}
                 {statusLabel(message) && <span className="badge state">{statusLabel(message)}</span>}
               </article>)}
               {transient && <>
@@ -234,6 +265,7 @@ export function App() {
                   </ul>}
                   <p className="stream-text">{transient.answer || 'Waiting for response…'}</p>
                   <Sources sources={transient.sources} />
+                  <MemoryReferences memory={transient.memory} open={(id) => void open(id)} busy={busy} />
                 </article>
               </>}
               <div ref={end} />

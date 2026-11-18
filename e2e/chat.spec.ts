@@ -49,3 +49,27 @@ test('research shows actual search progress and inspectable sources after reload
   await expect(answer).toContainText('scripted research demo');
   await expect(source).toBeVisible();
 });
+
+test('cross-conversation memory offers persistent clarification choices and opens the selected provenance', async ({ page }) => {
+  await page.goto('/');
+  const input = page.getByRole('textbox', { name: 'Message' });
+  const submit = async (text: string) => {
+    await input.fill(text);
+    await input.press('Enter');
+  };
+  for (const topic of ['Explain ceramic glazing', 'Explain ceramic firing']) {
+    await submit(topic);
+    await expect(page.locator('.assistant')).toContainText('scripted explanation');
+    await page.getByRole('button', { name: 'New chat' }).click();
+  }
+  await submit('Is the ceramic answer still correct?');
+  await expect(page.getByRole('group', { name: 'Clarification choices' })).toBeVisible();
+  await page.reload();
+  await page.getByRole('group', { name: 'Clarification choices' }).getByRole('button', { name: 'Explain ceramic glazing' }).click();
+  await expect(page.getByRole('group', { name: 'Clarification choices' })).toHaveCount(0);
+  const provenance = page.getByRole('region', { name: 'Past conversations' });
+  await expect(provenance).toContainText('Explain ceramic glazing');
+  await expect(provenance).toContainText('fake');
+  await provenance.getByRole('button', { name: 'Open Explain ceramic glazing' }).click();
+  await expect(page.locator('.message.user')).toContainText('Explain ceramic glazing');
+});
